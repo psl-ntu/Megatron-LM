@@ -326,6 +326,37 @@ def get_embedding_ranks(pp_ranks: List[int]):
     return embedding_ranks
 
 
+def merge_cuda_traces(trace_dir: str, merged_path: str) -> None:
+    files = sorted(
+        os.path.join(trace_dir, f)
+        for f in os.listdir(trace_dir)
+        if f.endswith(".json") and not f.startswith("merged")
+    )
+    if not files:
+        return
+
+    def filter_cuda_events(events, rank):
+        ret = []
+        for e in events:
+            if "cat" in e and e["cat"] == "kernel":
+                e["pid"] = f"rank {rank} cuda:{e['args']['device']}"
+                ret.append(e)
+        return ret
+
+    all_cuda_events = []
+    for rank, path in enumerate(files):
+        with open(path) as f:
+            data = json.load(f)
+
+        cuda_events = filter_cuda_events(data["traceEvents"], rank)
+
+        all_cuda_events += cuda_events
+
+    with open(merged_path, "w") as f:
+        json.dump({"traceEvents": all_cuda_events}, f, indent=4)
+
+
+
 if __name__ == "__main__":
     # Timestamp right after entering __main__ block (after all imports/library setup)
     _MAIN_ENTRY_TIME = time.time()
@@ -339,13 +370,46 @@ if __name__ == "__main__":
     # Optionally enable inprocess restart on pretrain
     pretrain, store = inprocess_restart.maybe_wrap_for_inprocess_restart(pretrain)
 
-    pretrain(
-        train_valid_test_datasets_provider,
-        partial(model_provider, gpt_builder),
-        ModelType.encoder_or_decoder,
-        forward_step,
-        args_defaults={'tokenizer_type': 'GPT2BPETokenizer'},
-        extra_args_provider=add_modelopt_args if has_nvidia_modelopt else None,
-        store=store,
-        get_embedding_ranks=get_embedding_ranks,
-    )
+    from torch.profiler import ProfilerActivity, profile, record_function
+
+    do_profile = int(os.environ.get("MEGATRON_PROFILE", "0")) == 1
+    merge_profile = int(os.environ.get("MERGE_MEGATRON_PROFILE", "0")) == 1 # buggy on multiple nodes
+    trace_dir = os.environ.get("TRACE_DIR", "megatron_trace")
+
+    if do_profile:
+        with profile(
+            activities=[ProfilerActivity.CUDA],
+        ) as prof:
+            pretrain(
+                train_valid_test_datasets_provider,
+                partial(model_provider, gpt_builder),
+                ModelType.encoder_or_decoder,
+                forward_step,
+                args_defaults={'tokenizer_type': 'GPT2BPETokenizer'},
+                extra_args_provider=add_modelopt_args if has_nvidia_modelopt else None,
+                store=store,
+                get_embedding_ranks=get_embedding_ranks,
+            )
+
+        if rank == 0:
+            os.makedirs(trace_dir, exist_ok=True)
+        torch.distributed.barrier()
+        prof.export_chrome_trace(f"{trace_dir}/rank{rank}.json")
+        print(f"Profile exported to {trace_dir}/rank{rank}.json")
+
+        if merge_profile:
+            torch.distributed.barrier()
+            if rank == 0:
+                merge_cuda_traces(trace_dir, f"{trace_dir}/merged.json")
+                print(f"Profile merged to {trace_dir}/merged.json")
+    else:
+        pretrain(
+            train_valid_test_datasets_provider,
+            partial(model_provider, gpt_builder),
+            ModelType.encoder_or_decoder,
+            forward_step,
+            args_defaults={'tokenizer_type': 'GPT2BPETokenizer'},
+            extra_args_provider=add_modelopt_args if has_nvidia_modelopt else None,
+            store=store,
+            get_embedding_ranks=get_embedding_ranks,
+        )

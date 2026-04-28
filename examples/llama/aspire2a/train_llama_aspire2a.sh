@@ -11,7 +11,11 @@ export CUDA_DEVICE_MAX_CONNECTIONS=${CUDA_DEVICE_MAX_CONNECTIONS:-1}
 
 DTYPE="bf16"
 
-CHECKPOINT_PATH=${1:-"checkpoints/llama3_8b_$DTYPE"}
+if [ -z "$SCRATCH" ]; then
+  return
+fi
+
+CHECKPOINT_PATH=${1:-"$SCRATCH/checkpoints/llama3_8b_$DTYPE"}
 TENSORBOARD_LOGS_PATH=${2:-"tensorboard_logs/llama3_8b_$DTYPE"}
 TOKENIZER_ARG=${3:-"MOCK"} # Path to tokenizer model, or "MOCK"
 DATA_ARG=${4:-"MOCK"}     # Data prefix, or "MOCK"
@@ -35,14 +39,15 @@ PRETRAIN_SCRIPT_PATH="pretrain_gpt.py"
 TP_SIZE=${TP_SIZE:-1}
 CP_SIZE=${CP_SIZE:-1}
 PP_SIZE=${PP_SIZE:-1}
-MICRO_BATCH_SIZE=1
-GLOBAL_BATCH_SIZE=128
+MICRO_BATCH_SIZE=${MICRO_BATCH_SIZE:-1}
+GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-128}
+TRAIN_SAMPLES=${TRAIN_SAMPLES-128}
 NUM_LAYERS=${NUM_LAYERS:-32}
-SEQ_LENGTH=8192
-MAX_POSITION_EMBEDDINGS=8192
+SEQ_LENGTH=${SEQ_LENGTH:-8192}
+MAX_POSITION_EMBEDDINGS=$SEQ_LENGTH
 
 # Data cache path (useful for both mock and real data)
-DATA_CACHE_PATH="${PWD}/benchmark_cache_llama3_8b_$DTYPE"
+DATA_CACHE_PATH="${SCRATCH}/benchmark_cache_llama3_8b_$DTYPE"
 mkdir -p "$DATA_CACHE_PATH"
 
 DISTRIBUTED_ARGS=(
@@ -79,7 +84,7 @@ MODEL_ARGS=(
 TRAINING_ARGS=(
     --micro-batch-size $MICRO_BATCH_SIZE
     --global-batch-size $GLOBAL_BATCH_SIZE
-    --train-samples 100
+    --train-samples $TRAIN_SAMPLES
     --lr-decay-samples 1949218748
     --lr-warmup-samples 3906252
     --lr 0.00015
@@ -98,6 +103,9 @@ TRAINING_ARGS=(
     --manual-gc 
     --empty-unused-memory-level 1 
     --exit-duration-in-mins 235 
+    --recompute-granularity full
+    --recompute-method uniform
+    --recompute-num-layers 1
 )
 
 # Conditional arguments based on DTYPE (FP8)
@@ -135,7 +143,7 @@ if [[ "$TOKENIZER_ARG" == "MOCK" ]] || [[ "$DATA_ARG" == "MOCK" ]] || [[ -z "$TO
     DATA_ARGS_LIST+=(
         "--mock-data"
         "--tokenizer-type NullTokenizer"
-        "--vocab-size 128256" 
+        "--vocab-size 1024" 
         "--data-cache-path ${DATA_CACHE_PATH}"
         "--tiktoken-pattern v2" 
         "--split '99,1,0'"
@@ -161,17 +169,17 @@ fi
 
 EVAL_AND_LOGGING_ARGS=(
     --log-interval 1
-    --eval-iters 32
+    --eval-iters 0
     --eval-interval 100
     --save-interval 1000
     --log-throughput
-    --profile
-    --profile-step-start 4
-    --profile-step-end 6
+    # --profile
+    # --profile-step-start 4
+    # --profile-step-end 6
     --ckpt-format torch_dist 
     --distributed-timeout-minutes 60
-    --save "$CHECKPOINT_PATH"
-    --load "$CHECKPOINT_PATH" 
+    # --save "$CHECKPOINT_PATH"
+    # --load "$CHECKPOINT_PATH" 
     --tensorboard-dir "$TENSORBOARD_LOGS_PATH"
 )
 
