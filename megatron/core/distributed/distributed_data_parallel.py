@@ -98,7 +98,8 @@ class DistributedDataParallel(_BaseDataParallel):
             pp_rank = self.pp_group[0].rank()
         else:
             pp_rank = self.pp_group.rank()
-        if disable_bucketing or pp_rank > 0:
+
+        if disable_bucketing:
             self.bucket_size = None
 
         self.param_to_bucket_group = {}

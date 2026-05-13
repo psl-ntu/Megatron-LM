@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # Environment variables for performance tuning
-export CUDA_DEVICE_MAX_CONNECTIONS=${CUDA_DEVICE_MAX_CONNECTIONS:-1}
-#export LOG_LEVEL=${LOG_LEVEL:-INFO}
-#export NCCL_IB_TIMEOUT=${NCCL_IB_TIMEOUT:-19}
-#export NVTE_FWD_LAYERNORM_SM_MARGIN=${NVTE_FWD_LAYERNORM_SM_MARGIN:-16}
-#export NVTE_BWD_LAYERNORM_SM_MARGIN=${NVTE_BWD_LAYERNORM_SM_MARGIN:-16}
-#export NCCL_P2P_NET_CHUNKSIZE=${NCCL_P2P_NET_CHUNKSIZE:-2097152}
-#export NCCL_AVOID_RECORD_STREAMS=${NCCL_AVOID_RECORD_STREAMS:-1}
+export CUDA_DEVICE_MAX_CONNECTIONS=${CUDA_DEVICE_MAX_CONNECTIONS:-8}
+# export LOG_LEVEL=${LOG_LEVEL:-INFO}
+# export NCCL_IB_TIMEOUT=${NCCL_IB_TIMEOUT:-19}
+# export NVTE_FWD_LAYERNORM_SM_MARGIN=${NVTE_FWD_LAYERNORM_SM_MARGIN:-16}
+# export NVTE_BWD_LAYERNORM_SM_MARGIN=${NVTE_BWD_LAYERNORM_SM_MARGIN:-16}
+# export NCCL_P2P_NET_CHUNKSIZE=${NCCL_P2P_NET_CHUNKSIZE:-2097152}
+# export NCCL_AVOID_RECORD_STREAMS=${NCCL_AVOID_RECORD_STREAMS:-1}
 
 DTYPE="bf16"
 
@@ -39,11 +39,14 @@ PRETRAIN_SCRIPT_PATH="pretrain_gpt.py"
 TP_SIZE=${TP_SIZE:-1}
 CP_SIZE=${CP_SIZE:-1}
 PP_SIZE=${PP_SIZE:-1}
+VIRTUAL_STAGE_PER_RANK=${VIRTUAL_STAGE_PER_RANK:-1}
+BUCKET_SIZE=${BUCKET_SIZE:-40000000}
 MICRO_BATCH_SIZE=${MICRO_BATCH_SIZE:-1}
 GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-128}
 TRAIN_SAMPLES=${TRAIN_SAMPLES-128}
 NUM_LAYERS=${NUM_LAYERS:-32}
 SEQ_LENGTH=${SEQ_LENGTH:-8192}
+VOCAB_SIZE=${VOCAB_SIZE:-4096}
 MAX_POSITION_EMBEDDINGS=$SEQ_LENGTH
 
 # Data cache path (useful for both mock and real data)
@@ -101,11 +104,8 @@ TRAINING_ARGS=(
     --cross-entropy-loss-fusion
     --calculate-per-token-loss 
     --manual-gc 
-    --empty-unused-memory-level 1 
+    --empty-unused-memory-level 0
     --exit-duration-in-mins 235 
-    --recompute-granularity full
-    --recompute-method uniform
-    --recompute-num-layers 1
 )
 
 # Conditional arguments based on DTYPE (FP8)
@@ -125,7 +125,23 @@ MODEL_PARALLEL_ARGS=(
     --context-parallel-size $CP_SIZE
     --pipeline-model-parallel-size $PP_SIZE # Not explicitly set in llama script options, assume 1 if not multi-node PP
     --sequence-parallel  # Always enable sequence parallelism with TP_SIZE=2
+    --ddp-bucket-size $BUCKET_SIZE
 )
+
+if [[ $PP_SIZE -gt 1 ]]; then
+    MODEL_PARALLEL_ARGS+=(
+        --num-virtual-stages-per-pipeline-rank $VIRTUAL_STAGE_PER_RANK
+        --overlap-p2p-communication-warmup-flush
+    )
+fi
+
+if [[ $ENABLE_RECOMPUTE -gt 0 ]]; then
+    MODEL_PARALLEL_ARGS+=(
+        --recompute-granularity full
+        --recompute-method block
+        --recompute-num-layers $VIRTUAL_STAGE_PER_RANK
+    )
+fi
 
 # Distributed Data Parallel (DDP) arguments
 # From original script's ddp_args
@@ -134,7 +150,6 @@ DDP_ARGS=(
     --overlap-grad-reduce
     --overlap-param-gather
 )
-TRAINING_ARGS+=("${DDP_ARGS[@]}")
 
 
 # Data arguments (conditional for mock vs real data)
@@ -143,7 +158,7 @@ if [[ "$TOKENIZER_ARG" == "MOCK" ]] || [[ "$DATA_ARG" == "MOCK" ]] || [[ -z "$TO
     DATA_ARGS_LIST+=(
         "--mock-data"
         "--tokenizer-type NullTokenizer"
-        "--vocab-size 1024" 
+        "--vocab-size ${VOCAB_SIZE}" 
         "--data-cache-path ${DATA_CACHE_PATH}"
         "--tiktoken-pattern v2" 
         "--split '99,1,0'"
@@ -176,12 +191,26 @@ EVAL_AND_LOGGING_ARGS=(
     # --profile
     # --profile-step-start 4
     # --profile-step-end 6
-    --ckpt-format torch_dist 
     --distributed-timeout-minutes 60
     # --save "$CHECKPOINT_PATH"
     # --load "$CHECKPOINT_PATH" 
     --tensorboard-dir "$TENSORBOARD_LOGS_PATH"
 )
+
+
+if [[ $ENABLE_FSDP -gt 0 ]]; then
+    DDP_ARGS+=(
+        --use-megatron-fsdp
+        --data-parallel-sharding-strategy optim_grads
+    )
+    EVAL_AND_LOGGING_ARGS+=(
+        --ckpt-format fsdp_dtensor
+    )
+else
+    EVAL_AND_LOGGING_ARGS+=(
+        --ckpt-format torch_dist
+    )
+fi
 
 # Ensure pretrain_gpt.py is found
 if [ ! -f "$PRETRAIN_SCRIPT_PATH" ]; then
@@ -189,6 +218,8 @@ if [ ! -f "$PRETRAIN_SCRIPT_PATH" ]; then
     echo "Please ensure you are running this script from the root of the Megatron-LM repository, and pretrain_gpt.py is present."
     exit 1
 fi
+
+TRAINING_ARGS+=("${DDP_ARGS[@]}")
 
 # Run the training command
 torchrun ${DISTRIBUTED_ARGS[@]} \

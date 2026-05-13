@@ -365,14 +365,19 @@ def _get_dp_tp_mesh(dp_cp_group, tp_group, ep_size=1):
     world_size = dist.get_world_size()
 
     tp_size = dist.get_world_size(tp_group) if tp_group is not None else 1
+    dp_cp_size = dp_cp_group.size()
+    pp_size = world_size // (dp_cp_size * ep_size * tp_size)
     # TODO: Supports configurable (dp, cp, ep, tp) order.
     mesh = einops.rearrange(
         torch.arange(world_size),
-        "(dp_cp ep tp) -> ep dp_cp tp",
-        dp_cp=dp_cp_group.size(),
+        "(pp dp_cp ep tp) -> pp ep dp_cp tp",
+        pp=pp_size,
+        dp_cp=dp_cp_size,
         tp=tp_size,
         ep=ep_size,
     )
+    pp_rank = dist.get_rank() // (dp_cp_size * ep_size * tp_size)                                                                                                                                   
+    mesh = mesh[pp_rank]  
 
     mesh_dp_ranks = einops.rearrange(mesh, 'ep dp_cp tp -> (ep tp) dp_cp', dp_cp=dp_cp_group.size())
     dp_cp_group_ranks = dist.get_process_group_ranks(dp_cp_group)

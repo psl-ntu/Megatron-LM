@@ -327,11 +327,12 @@ def get_embedding_ranks(pp_ranks: List[int]):
 
 
 def merge_cuda_traces(trace_dir: str, merged_path: str) -> None:
+    import re
     files = sorted(
-        os.path.join(trace_dir, f)
-        for f in os.listdir(trace_dir)
-        if f.endswith(".json") and not f.startswith("merged")
-    )
+    os.path.join(trace_dir, f)
+    for f in os.listdir(trace_dir)
+    if re.match(r"rank\d+\.json$", f)
+)
     if not files:
         return
 
@@ -374,11 +375,13 @@ if __name__ == "__main__":
 
     do_profile = int(os.environ.get("MEGATRON_PROFILE", "0")) == 1
     merge_profile = int(os.environ.get("MERGE_MEGATRON_PROFILE", "0")) == 1 # buggy on multiple nodes
+    with_stack = int(os.environ.get("MEGATRON_PROFILE_STACK", "0")) == 1
     trace_dir = os.environ.get("TRACE_DIR", "megatron_trace")
 
     if do_profile:
         with profile(
-            activities=[ProfilerActivity.CUDA],
+            activities=[ProfilerActivity.CUDA, ProfilerActivity.CPU],
+            with_stack=with_stack,
         ) as prof:
             pretrain(
                 train_valid_test_datasets_provider,
