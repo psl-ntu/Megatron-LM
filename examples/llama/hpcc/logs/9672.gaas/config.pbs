@@ -23,7 +23,7 @@ export CP_SIZE=${CP_SIZE:-1}
 export RECOMPUTE_LAYERS=${RECOMPUTE_LAYERS:-0}    # 0=disabled | N=recompute N layers per PP stage (full/uniform)
 export PROFILE=${PROFILE:-0}             # 0=disabled | 1=enabled (NVTX markers, use with nsys profile)
 export MICRO_BATCH_SIZE=${MICRO_BATCH_SIZE:-2}
-export GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-1024}
+export GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-128}
 export TRAIN_SAMPLES=${TRAIN_SAMPLES:-$(( GLOBAL_BATCH_SIZE * 10 ))}
 export NUM_LAYERS=${NUM_LAYERS:-32}
 export SEQ_LENGTH=${SEQ_LENGTH:-4096}
