@@ -1,0 +1,1312 @@
+CPU affinity on hpc-gaas-g21: pid 282847's current affinity list: 0-56,69-107
+CPU affinity on hpc-gaas-g12: pid 1610808's current affinity list: 0-56,69-107
+CPU affinity on hpc-gaas-g20: pid 3499712's current affinity list: 0-56,69-107
+CPU affinity on hpc-gaas-g24: pid 1325130's current affinity list: 0-56,69-107
+CPU affinity on hpc-gaas-g17: pid 3474903's current affinity list: 0-56,69-107
+CPU affinity on hpc-gaas-g10: pid 3498940's current affinity list: 0-56,69-107
+CPU affinity on hpc-gaas-g18: pid 3271677's current affinity list: 0-56,69-107
+CPU affinity on hpc-gaas-g19: pid 3401051's current affinity list: 0-56,69-107
+CPU affinity on hpc-gaas-g14: pid 4193170's current affinity list: 0-56,69-107
+CPU affinity on hpc-gaas-g13: pid 3627265's current affinity list: 0-56,69-107
+CPU affinity on hpc-gaas-g09: pid 101487's current affinity list: 0-56,69-107
+CPU affinity on hpc-gaas-g22: pid 3464657's current affinity list: 0-56,69-107
+CPU affinity on hpc-gaas-g15: pid 3742770's current affinity list: 0-56,69-107
+CPU affinity on hpc-gaas-g11: pid 2602961's current affinity list: 0-56,69-107
+CPU affinity on hpc-gaas-g08: pid 3670867's current affinity list: 0-56,69-107
+CPU affinity on hpc-gaas-g23: pid 2128019's current affinity list: 0-56,69-107
+/home/haoxuan.wang/.conda/envs/megatron-lm/lib/python3.12/site-packages/modelopt/torch/__init__.py:36: UserWarning: transformers version 5.6.2 is not tested with nvidia-modelopt and may cause issues. Please install recommended version with `pip install nvidia-modelopt[hf]` if working with HF models.
+  _warnings.warn(
+using world size: 128, data-parallel size: 128, context-parallel size: 1, hierarchical context-parallel sizes: None, tensor-model-parallel size: 1, pipeline-model-parallel size: 1
+/home/haoxuan.wang/Megatron-LM/megatron/training/utils.py:411: UserWarning: Overriding default arguments for tokenizer_type:GPT2BPETokenizer with tokenizer_type:NullTokenizer
+  warnings.warn(message)
+Number of virtual stages per pipeline stage: None
+using torch.bfloat16 for parameters ...
+------------------------ arguments ------------------------
+  account_for_embedding_in_pipeline_split ......... False
+  account_for_loss_in_pipeline_split .............. False
+  accumulate_allreduce_grads_in_fp32 .............. False
+  activation_func_clamp_value ..................... None
+  adam_beta1 ...................................... 0.9
+  adam_beta2 ...................................... 0.95
+  adam_eps ........................................ 1e-08
+  add_bias_linear ................................. False
+  add_position_embedding .......................... True
+  add_qkv_bias .................................... False
+  adlr_autoresume ................................. False
+  adlr_autoresume_interval ........................ 1000
+  align_grad_reduce ............................... True
+  align_param_gather .............................. False
+  allow_ambiguous_pad_tokens ...................... False
+  app_tag_run_name ................................ None
+  app_tag_run_version ............................. 0.0.0
+  apply_query_key_layer_scaling ................... False
+  apply_residual_connection_post_layernorm ........ False
+  apply_rope_fusion ............................... True
+  apply_wd_to_qk_layernorm ........................ False
+  async_save ...................................... False
+  async_tensor_model_parallel_allreduce ........... True
+  attention_backend ............................... AttnBackend.fused
+  attention_dropout ............................... 0.0
+  attention_output_gate ........................... False
+  attention_softmax_in_fp32 ....................... False
+  auto_detect_ckpt_format ......................... False
+  barrier_with_L1_time ............................ True
+  batch_invariant_mode ............................ False
+  bert_binary_head ................................ True
+  bert_embedder_type .............................. megatron
+  bert_load ....................................... None
+  bf16 ............................................ True
+  bias_dropout_fusion ............................. True
+  bias_gelu_fusion ................................ False
+  bias_swiglu_fusion .............................. True
+  biencoder_projection_dim ........................ 0
+  biencoder_shared_query_context_model ............ False
+  block_data_path ................................. None
+  cache_mla_latents ............................... False
+  calc_ft_timeouts ................................ False
+  calculate_per_token_loss ........................ True
+  check_for_large_grads ........................... False
+  check_for_nan_in_loss_and_grad .................. True
+  check_for_spiky_loss ............................ False
+  check_weight_hash_across_dp_replicas_interval ... None
+  ckpt_assume_constant_structure .................. False
+  ckpt_convert_format ............................. None
+  ckpt_convert_save ............................... None
+  ckpt_convert_update_legacy_dist_opt_format ...... False
+  ckpt_format ..................................... torch_dist
+  ckpt_fully_parallel_load ........................ False
+  ckpt_fully_parallel_save ........................ True
+  ckpt_fully_parallel_save_deprecated ............. False
+  ckpt_step ....................................... None
+  classes_fraction ................................ 1.0
+  clip_grad ....................................... 1.0
+  clone_scatter_output_in_embedding ............... True
+  config_logger_dir ............................... 
+  consumed_train_samples .......................... 0
+  consumed_valid_samples .......................... 0
+  context_parallel_size ........................... 1
+  cp_comm_type .................................... ['p2p']
+  cpu_offloading_num_layers ....................... 0
+  create_all_gather_group ......................... False
+  create_attention_mask_in_dataloader ............. False
+  cross_entropy_fusion_impl ....................... native
+  cross_entropy_loss_fusion ....................... True
+  cuda_graph_impl ................................. none
+  cuda_graph_scope ................................ []
+  cuda_graph_warmup_steps ......................... 3
+  data_args_path .................................. None
+  data_cache_path ................................. /projects_vol/gp_chen.wang/hxwang/scratch/benchmark_cache_llama3_8b_bf16
+  data_parallel_random_init ....................... False
+  data_parallel_sharding_strategy ................. no_shard
+  data_parallel_size .............................. 128
+  data_path ....................................... None
+  data_per_class_fraction ......................... 1.0
+  data_sharding ................................... True
+  dataloader_defer_npy_index_mmap ................. False
+  dataloader_fast_cache_load ...................... False
+  dataloader_type ................................. single
+  ddp_average_in_collective ....................... False
+  ddp_bucket_size ................................. None
+  ddp_num_buckets ................................. None
+  ddp_pad_buckets_for_high_nccl_busbw ............. False
+  ddp_reduce_scatter_with_fp32_accumulation ....... False
+  decode_only_cuda_graphs ......................... False
+  decoder_first_pipeline_num_layers ............... None
+  decoder_last_pipeline_num_layers ................ None
+  decoder_num_layers .............................. None
+  decoder_seq_length .............................. None
+  decoupled_lr .................................... 0.0005
+  decoupled_min_lr ................................ 4.5e-05
+  decrease_batch_size_if_needed ................... False
+  defer_embedding_wgrad_compute ................... False
+  delay_wgrad_compute ............................. False
+  deprecated_use_mcore_models ..................... True
+  deterministic_mode .............................. False
+  dino_bottleneck_size ............................ 256
+  dino_freeze_last_layer .......................... 1
+  dino_head_hidden_size ........................... 2048
+  dino_local_crops_number ......................... 10
+  dino_local_img_size ............................. 96
+  dino_norm_last_layer ............................ False
+  dino_teacher_temp ............................... 0.07
+  dino_warmup_teacher_temp ........................ 0.04
+  dino_warmup_teacher_temp_epochs ................. 30
+  disable_bf16_reduced_precision_matmul ........... False
+  disable_chunked_prefill ......................... True
+  disable_jit_fuser ............................... False
+  disable_straggler_on_startup .................... False
+  disable_symmetric_registration .................. False
+  dist_ckpt_format_deprecated ..................... None
+  dist_ckpt_optim_fully_reshardable ............... False
+  dist_ckpt_save_pre_mcore_014 .................... False
+  dist_ckpt_strictness ............................ assume_ok_unexpected
+  distrib_optim_fully_reshardable_mem_efficient ... False
+  distribute_saved_activations .................... False
+  distributed_backend ............................. nccl
+  distributed_timeout_minutes ..................... 60
+  distributed_timeout_seconds_after_init .......... None
+  dsa_indexer_head_dim ............................ None
+  dsa_indexer_loss_coeff .......................... None
+  dsa_indexer_n_heads ............................. None
+  dsa_indexer_topk ................................ None
+  dsa_indexer_use_sparse_loss ..................... False
+  dump_param_to_param_group_map ................... None
+  embedding_init_method_std ....................... None
+  embedding_path .................................. None
+  empty_unused_memory_level ....................... 1
+  enable_cuda_graph ............................... False
+  enable_experimental ............................. False
+  enable_ft_package ............................... False
+  enable_full_sharding_in_hsdp .................... False
+  enable_gloo_process_groups ...................... True
+  enable_gpt_oss .................................. False
+  enable_msc ...................................... True
+  enable_one_logger ............................... True
+  encoder_num_layers .............................. 32
+  encoder_seq_length .............................. 4096
+  end_weight_decay ................................ 0.1
+  eod_mask_loss ................................... False
+  ep_overlap_early_attn_memory_release ............ False
+  error_injection_rate ............................ 0
+  error_injection_type ............................ transient_error
+  eval_interval ................................... 100
+  eval_iters ...................................... 0
+  evidence_data_path .............................. None
+  exit_duration_in_mins ........................... 235
+  exit_interval ................................... None
+  exit_on_missing_checkpoint ...................... False
+  exit_signal ..................................... 15
+  exit_signal_handler ............................. False
+  exit_signal_handler_for_dataloader .............. False
+  exp_avg_dtype ................................... torch.float32
+  exp_avg_sq_dtype ................................ torch.float32
+  experimental_attention_variant .................. None
+  expert_model_parallel_size ...................... 1
+  expert_tensor_parallel_size ..................... 1
+  export_force_local_attention .................... False
+  export_kd_cfg ................................... None
+  export_kd_teacher_ckpt_format ................... None
+  export_kd_teacher_load .......................... None
+  export_kd_teacher_model_config .................. None
+  export_kv_cache_quant ........................... none
+  export_legacy_megatron .......................... False
+  export_model_type ............................... GPTModel
+  export_moe_apply_probs_on_input ................. False
+  export_offline_model ............................ False
+  export_qk_l2_norm ............................... False
+  export_quant_cfg ................................ None
+  export_real_quant_cfg ........................... None
+  export_te_mcore_model ........................... False
+  external_cuda_graph ............................. False
+  fake_process_group .............................. False
+  ffn_hidden_size ................................. 14336
+  fim_data ........................................ False
+  fim_eod_token ................................... <|endoftext|>
+  fim_fragment_rate ............................... None
+  fim_middle_token ................................ <fim_middle>
+  fim_no_prefix ................................... None
+  fim_pad_token ................................... <fim_pad>
+  fim_prefix_token ................................ <fim_prefix>
+  fim_rate ........................................ 0.5
+  fim_split_sample ................................ None
+  fim_spm_rate .................................... 0.5
+  fim_suffix_token ................................ <fim_suffix>
+  fine_grained_activation_offloading .............. False
+  finetune ........................................ False
+  finetune_data_split ............................. train
+  finetune_hf_dataset ............................. None
+  first_last_layers_bf16 .......................... False
+  flash_decode .................................... False
+  fp16 ............................................ False
+  fp16_lm_cross_entropy ........................... False
+  fp32_residual_connection ........................ False
+  fp4 ............................................. None
+  fp4_param ....................................... False
+  fp4_quantizer_factory ........................... None
+  fp4_recipe ...................................... nvfp4
+  fp8 ............................................. None
+  fp8_amax_compute_algo ........................... most_recent
+  fp8_amax_history_len ............................ 1
+  fp8_interval .................................... 1
+  fp8_margin ...................................... 0
+  fp8_param_gather ................................ False
+  fp8_quantizer_factory ........................... None
+  fp8_recipe ...................................... delayed
+  fp8_wgrad ....................................... True
+  fsdp_double_buffer .............................. False
+  fsdp_manual_registration ........................ False
+  ft_num_warmup_iters ............................. 5
+  full_validation ................................. False
+  global_batch_size ............................... 1024
+  glu_linear_offset ............................... 0.0
+  grad_reduce_in_bf16 ............................. True
+  gradient_accumulation_fusion .................... True
+  gradient_reduce_div_fusion ...................... True
+  group_query_attention ........................... True
+  grpo_clamp_eps_lower ............................ 0.01
+  grpo_clamp_eps_upper ............................ 0.01
+  grpo_entropy_term_weight ........................ 0.0
+  grpo_filter_groups_with_same_reward ............. False
+  grpo_group_size ................................. 2
+  grpo_iterations ................................. 2
+  grpo_kl_beta .................................... 0.001
+  grpo_prompts_per_step ........................... 32
+  head_lr_mult .................................... 1.0
+  heterogeneous_layers_config_encoded_json ........ None
+  heterogeneous_layers_config_path ................ None
+  hidden_dropout .................................. 0.0
+  hidden_size ..................................... 4096
+  hierarchical_context_parallel_sizes ............. None
+  high_priority_stream_groups ..................... []
+  hybrid_attention_ratio .......................... 0.0
+  hybrid_context_parallel ......................... False
+  hybrid_mlp_ratio ................................ 0.0
+  hybrid_override_pattern ......................... None
+  hysteresis ...................................... 2
+  ict_head_size ................................... None
+  ict_load ........................................ None
+  img_h ........................................... 224
+  img_w ........................................... 224
+  indexer_batch_size .............................. 128
+  indexer_log_interval ............................ 1000
+  inference_batch_times_seqlen_threshold .......... -1
+  inference_coordinator_port ...................... 12346
+  inference_dynamic_batching ...................... False
+  inference_dynamic_batching_block_size ........... 256
+  inference_dynamic_batching_buffer_size_gb ....... 40.0
+  inference_dynamic_batching_cuda_graph_max_tokens  16384
+  inference_dynamic_batching_cuda_graph_mixed_prefill_count  16
+  inference_dynamic_batching_max_requests ......... None
+  inference_dynamic_batching_max_tokens ........... None
+  inference_dynamic_batching_num_cuda_graphs ...... 16
+  inference_dynamic_batching_paused_buffer_size_gb  None
+  inference_dynamic_batching_track_paused_request_events  False
+  inference_dynamic_batching_unified_memory_level . 0
+  inference_fuse_tp_communication ................. False
+  inference_logging_step_interval ................. 0
+  inference_max_batch_size ........................ 8
+  inference_max_seq_length ........................ 2560
+  inference_rng_tracker ........................... False
+  inference_wandb_logging ......................... False
+  init_method_std ................................. 0.0134
+  init_method_xavier_uniform ...................... False
+  init_model_with_meta_device ..................... False
+  initial_loss_scale .............................. 4294967296
+  inprocess_active_world_size ..................... 128
+  inprocess_barrier_timeout ....................... 120
+  inprocess_completion_timeout .................... 120
+  inprocess_empty_cuda_cache ...................... False
+  inprocess_granularity ........................... node
+  inprocess_hard_timeout .......................... 90
+  inprocess_heartbeat_interval .................... 30
+  inprocess_heartbeat_timeout ..................... 60
+  inprocess_last_call_wait ........................ 1
+  inprocess_max_iterations ........................ None
+  inprocess_monitor_process_interval .............. 1.0
+  inprocess_monitor_thread_interval ............... 1.0
+  inprocess_progress_watchdog_interval ............ 1.0
+  inprocess_restart ............................... False
+  inprocess_soft_timeout .......................... 60
+  inprocess_termination_grace_time ................ 1
+  is_hybrid_model ................................. False
+  iter_per_epoch .................................. 1250
+  iterations_to_skip .............................. []
+  keep_fp8_transpose_cache ........................ False
+  kitchen_attention_backend ....................... sdpa
+  kv_channels ..................................... 128
+  kv_lora_rank .................................... 32
+  langrl_env_config ............................... None
+  langrl_external_server .......................... False
+  langrl_inference_server_conversation_template ... None
+  langrl_inference_server_type .................... inplace_megatron
+  layernorm_epsilon ............................... 1e-05
+  layernorm_zero_centered_gamma ................... True
+  lazy_mpu_init ................................... None
+  legacy_tokenizer ................................ False
+  linear_attention_freq ........................... None
+  linear_conv_kernel_dim .......................... 4
+  linear_key_head_dim ............................. 128
+  linear_num_key_heads ............................ 16
+  linear_num_value_heads .......................... 32
+  linear_value_head_dim ........................... 128
+  load ............................................ None
+  load_main_params_from_ckpt ...................... False
+  local_rank ...................................... 0
+  log_device_memory_used .......................... False
+  log_energy ...................................... False
+  log_interval .................................... 1
+  log_loss_scale_to_tensorboard ................... True
+  log_max_attention_logit ......................... False
+  log_memory_interval ............................. None
+  log_memory_to_tensorboard ....................... False
+  log_num_zeros_in_grad ........................... False
+  log_params_norm ................................. False
+  log_progress .................................... False
+  log_straggler ................................... False
+  log_throughput .................................. True
+  log_timers_to_tensorboard ....................... False
+  log_validation_ppl_to_tensorboard ............... False
+  log_world_size_to_tensorboard ................... False
+  logging_level ................................... None
+  loss_scale ...................................... None
+  loss_scale_window ............................... 1000
+  lr .............................................. 0.00015
+  lr_decay_iters .................................. None
+  lr_decay_samples ................................ 1949218748
+  lr_decay_style .................................. cosine
+  lr_warmup_fraction .............................. None
+  lr_warmup_init .................................. 0.0
+  lr_warmup_iters ................................. 0
+  lr_warmup_samples ............................... 3906252
+  lr_wsd_decay_iters .............................. None
+  lr_wsd_decay_samples ............................ None
+  lr_wsd_decay_style .............................. exponential
+  main_grads_dtype ................................ torch.float32
+  main_params_dtype ............................... torch.float32
+  make_vocab_size_divisible_by .................... 128
+  mamba_head_dim .................................. 64
+  mamba_num_groups ................................ 8
+  mamba_num_heads ................................. None
+  mamba_state_dim ................................. 128
+  manual_gc ....................................... True
+  manual_gc_eval .................................. True
+  manual_gc_interval .............................. 0
+  mask_factor ..................................... 1.0
+  mask_prob ....................................... 0.15
+  mask_type ....................................... random
+  masked_softmax_fusion ........................... True
+  max_position_embeddings ......................... 4096
+  max_seqlen_per_dp_cp_rank ....................... None
+  max_tokens_to_oom ............................... 12000
+  memory_snapshot_path ............................ snapshot.pickle
+  merge_file ...................................... None
+  micro_batch_size ................................ 2
+  microbatch_group_size_per_vp_stage .............. None
+  mid_level_dataset_surplus ....................... 0.005
+  min_loss_scale .................................. 1.0
+  min_lr .......................................... 1e-05
+  min_offloaded_tensor_size ....................... 1048576
+  mlp_chunks_for_prefill .......................... 1
+  mmap_bin_files .................................. False
+  mock_data ....................................... True
+  modelopt_enabled ................................ False
+  moe_apply_probs_on_input ........................ False
+  moe_aux_loss_coeff .............................. 0.0
+  moe_deepep_num_sms .............................. 20
+  moe_enable_deepep ............................... False
+  moe_enable_routing_replay ....................... False
+  moe_expert_capacity_factor ...................... None
+  moe_extended_tp ................................. False
+  moe_ffn_hidden_size ............................. None
+  moe_flex_dispatcher_backend ..................... deepep
+  moe_grouped_gemm ................................ False
+  moe_hybridep_num_sms ............................ 16
+  moe_input_jitter_eps ............................ None
+  moe_latent_size ................................. None
+  moe_layer_freq .................................. 1
+  moe_layer_recompute ............................. False
+  moe_pad_expert_input_to_capacity ................ False
+  moe_pad_experts_for_cuda_graph_inference ........ False
+  moe_per_layer_logging ........................... False
+  moe_permute_fusion .............................. False
+  moe_router_bias_update_rate ..................... 0.001
+  moe_router_dtype ................................ None
+  moe_router_enable_expert_bias ................... False
+  moe_router_force_load_balancing ................. False
+  moe_router_fusion ............................... False
+  moe_router_group_topk ........................... None
+  moe_router_load_balancing_type .................. aux_loss
+  moe_router_num_groups ........................... None
+  moe_router_padding_for_fp8 ...................... False
+  moe_router_padding_for_quantization ............. False
+  moe_router_pre_softmax .......................... False
+  moe_router_score_function ....................... softmax
+  moe_router_topk ................................. 2
+  moe_router_topk_scaling_factor .................. None
+  moe_shared_expert_gate .......................... False
+  moe_shared_expert_intermediate_size ............. None
+  moe_shared_expert_overlap ....................... False
+  moe_token_dispatcher_type ....................... allgather
+  moe_token_drop_policy ........................... probs
+  moe_upcycling_granularity ....................... 1
+  moe_use_legacy_grouped_gemm ..................... False
+  moe_use_upcycling ............................... False
+  moe_z_loss_coeff ................................ None
+  mrope_section ................................... None
+  mscale .......................................... 1.0
+  mscale_all_dim .................................. 0.0
+  mtp_loss_scaling_factor ......................... 0.1
+  mtp_num_layers .................................. None
+  mtp_standalone .................................. False
+  multi_latent_attention .......................... False
+  multiple_validation_sets ........................ False
+  muon_extra_scale_factor ......................... 1.0
+  muon_fp32_matmul_prec ........................... medium
+  muon_momentum ................................... 0.9
+  muon_num_ns_steps ............................... 5
+  muon_scale_mode ................................. spectral
+  muon_split_qkv .................................. True
+  muon_tp_mode .................................... blockwise
+  muon_use_nesterov ............................... False
+  nccl_all_reduce_for_prefill ..................... False
+  nccl_communicator_config_path ................... None
+  nccl_ub ......................................... False
+  no_load_optim ................................... None
+  no_load_rng ..................................... None
+  no_persist_layer_norm ........................... False
+  no_rope_freq .................................... None
+  no_save_optim ................................... None
+  no_save_rng ..................................... None
+  no_weight_decay_cond_type ....................... None
+  non_persistent_ckpt_type ........................ None
+  non_persistent_global_ckpt_dir .................. None
+  non_persistent_local_ckpt_algo .................. fully_parallel
+  non_persistent_local_ckpt_dir ................... None
+  non_persistent_save_interval .................... None
+  normalization ................................... LayerNorm
+  num_attention_heads ............................. 32
+  num_channels .................................... 3
+  num_classes ..................................... 1000
+  num_dataset_builder_threads ..................... 1
+  num_distributed_optimizer_instances ............. 1
+  num_experts ..................................... None
+  num_layers ...................................... 32
+  num_layers_at_end_in_bf16 ....................... 1
+  num_layers_at_start_in_bf16 ..................... 1
+  num_layers_per_virtual_pipeline_stage ........... None
+  num_query_groups ................................ 8
+  num_virtual_stages_per_pipeline_rank ............ None
+  num_workers ..................................... 1
+  object_storage_cache_path ....................... None
+  offload_modules ................................. []
+  one_logger_async ................................ False
+  one_logger_project .............................. megatron-lm
+  one_logger_run_name ............................. None
+  onnx_safe ....................................... None
+  openai_gelu ..................................... False
+  optimizer ....................................... adam
+  optimizer_cpu_offload ........................... False
+  optimizer_offload_fraction ...................... 1.0
+  outer_dp_sharding_strategy ...................... no_shard
+  output_bert_embeddings .......................... False
+  overlap_cpu_optimizer_d2h_h2d ................... False
+  overlap_grad_reduce ............................. True
+  overlap_moe_expert_parallel_comm ................ False
+  overlap_p2p_comm ................................ False
+  overlap_p2p_comm_warmup_flush ................... False
+  overlap_param_gather ............................ True
+  overlap_param_gather_with_optimizer_step ........ False
+  override_opt_param_scheduler .................... False
+  padded_vocab_size ............................... None
+  params_dtype .................................... torch.bfloat16
+  patch_dim ....................................... 16
+  per_dataset_sequences_path ...................... None
+  per_split_data_args_path ........................ None
+  perform_initialization .......................... True
+  perform_rl_step ................................. False
+  phase_transition_iterations ..................... None
+  pin_cpu_grads ................................... True
+  pin_cpu_params .................................. True
+  pipeline_model_parallel_comm_backend ............ None
+  pipeline_model_parallel_layout .................. None
+  pipeline_model_parallel_size .................... 1
+  position_embedding_type ......................... rope
+  pretrained_checkpoint ........................... None
+  profile ......................................... False
+  profile_ranks ................................... [0]
+  profile_step_end ................................ 12
+  profile_step_start .............................. 10
+  q_lora_rank ..................................... None
+  qk_clip ......................................... False
+  qk_clip_alpha ................................... 0.5
+  qk_clip_threshold ............................... 100
+  qk_head_dim ..................................... 128
+  qk_l2_norm ...................................... False
+  qk_layernorm .................................... False
+  qk_pos_emb_head_dim ............................. 64
+  query_in_block_prob ............................. 0.1
+  quick_geglu ..................................... False
+  rampup_batch_size ............................... None
+  rank ............................................ 0
+  recompute_granularity ........................... None
+  recompute_method ................................ None
+  recompute_modules ............................... None
+  recompute_num_layers ............................ None
+  record_memory_history ........................... False
+  refit_method .................................... gloo
+  relative_attention_max_distance ................. 128
+  relative_attention_num_buckets .................. 32
+  replication ..................................... False
+  replication_factor .............................. 2
+  replication_jump ................................ None
+  rerun_mode ...................................... validate_results
+  reset_attention_mask ............................ False
+  reset_position_ids .............................. False
+  result_rejected_tracker_filename ................ None
+  retriever_report_topk_accuracies ................ []
+  retriever_score_scaling ......................... False
+  reuse_grad_buf_for_mxfp8_param_ag ............... False
+  rl_default_temperature .......................... 1.0
+  rl_default_top_k ................................ -1
+  rl_default_top_p ................................ 0
+  rl_importance_sampling_truncation_coef .......... None
+  rl_inference_expert_model_parallel_size ......... None
+  rl_inference_expert_tensor_model_parallel_size .. None
+  rl_inference_logprobs_is_correction ............. False
+  rl_inference_model_unified_memory_level ......... 0
+  rl_inference_pipeline_model_parallel_size ....... None
+  rl_inference_tensor_model_parallel_size ......... None
+  rl_offload_inference_model_weights_when_idle .... False
+  rl_offload_kv_cache_during_training ............. False
+  rl_offload_optimizer_during_inference ........... False
+  rl_parallel_generation_tasks .................... 512
+  rl_partial_rollouts ............................. False
+  rl_prompts_per_eval ............................. 32
+  rl_remove_kv_cache_during_training .............. False
+  rl_reset_cuda_graphs ............................ False
+  rl_sequence_packing_algo ........................ fifo
+  rl_sequence_packing_max_sequences_per_bin ....... 50
+  rl_skip_bos_token ............................... False
+  rl_training_cuda_graphs ......................... False
+  rl_use_sequence_packing ......................... False
+  rl_verify_model_weights_swap .................... False
+  rope_scaling_factor ............................. 8.0
+  rope_type ....................................... None
+  rotary_base ..................................... 1000000
+  rotary_interleaved .............................. False
+  rotary_percent .................................. 1.0
+  rotary_scaling_factor ........................... 1.0
+  rotary_seq_len_interpolation_factor ............. None
+  run_workload_inspector_server ................... False
+  sample_rate ..................................... 1.0
+  save ............................................ None
+  save_dgrads_interval ............................ None
+  save_interval ................................... None
+  save_retain_interval ............................ None
+  save_wgrads_interval ............................ None
+  scatter_gather_tensors_in_pipeline .............. True
+  seed ............................................ 1234
+  seq_length ...................................... 4096
+  sequence_parallel ............................... False
+  sft ............................................. False
+  sft_tokenizer_prompt_format ..................... nemotron-h-aligned
+  sgd_momentum .................................... 0.9
+  sharp_enabled_group ............................. None
+  short_seq_prob .................................. 0.1
+  skip_train ...................................... False
+  skipped_train_samples ........................... 0
+  softmax_type .................................... vanilla
+  spec ............................................ None
+  split ........................................... 99,1,0
+  squared_relu .................................... False
+  start_weight_decay .............................. 0.1
+  straggler_ctrlr_port ............................ 65535
+  straggler_minmax_count .......................... 1
+  strict_fsdp_dtensor_load ........................ True
+  suggested_communication_unit_size ............... None
+  swiglu .......................................... True
+  swin_backbone_type .............................. tiny
+  symmetric_ar_type ............................... None
+  te_precision_config_file ........................ None
+  te_rng_tracker .................................. False
+  tensor_model_parallel_size ...................... 1
+  tensorboard_dir ................................. /projects_vol/gp_chen.wang/hxwang/scratch/tensorboard_logs/llama3_8b_bf16
+  tensorboard_log_interval ........................ 1
+  tensorboard_queue_size .......................... 1000
+  test_data_path .................................. None
+  test_mode ....................................... False
+  tiktoken_num_special_tokens ..................... 1000
+  tiktoken_pattern ................................ v2
+  tiktoken_special_tokens ......................... None
+  timing_log_level ................................ 0
+  timing_log_option ............................... minmax
+  titles_data_path ................................ None
+  tokenizer_hf_include_special_tokens ............. False
+  tokenizer_hf_use_fast ........................... False
+  tokenizer_metadata .............................. None
+  tokenizer_model ................................. None
+  tokenizer_sentencepiece_legacy .................. False
+  tokenizer_special_tokens ........................ None
+  tokenizer_type .................................. NullTokenizer
+  torch_fsdp2_reshard_after_forward ............... True
+  tp_comm_bootstrap_backend ....................... nccl
+  tp_comm_bulk_dgrad .............................. True
+  tp_comm_bulk_wgrad .............................. True
+  tp_comm_overlap ................................. False
+  tp_comm_overlap_ag .............................. True
+  tp_comm_overlap_cfg ............................. None
+  tp_comm_overlap_rs .............................. True
+  tp_comm_overlap_rs_dgrad ........................ False
+  tp_comm_split_ag ................................ True
+  tp_comm_split_rs ................................ True
+  train_data_path ................................. None
+  train_iters ..................................... None
+  train_samples ................................... 10240
+  train_sync_interval ............................. None
+  transformer_impl ................................ transformer_engine
+  transformer_pipeline_model_parallel_size ........ 1
+  trust_remote_code ............................... False
+  untie_embeddings_and_output_weights ............. True
+  use_checkpoint_args ............................. False
+  use_checkpoint_opt_param_scheduler .............. False
+  use_cpu_initialization .......................... None
+  use_dist_ckpt ................................... True
+  use_dist_ckpt_deprecated ........................ False
+  use_distributed_optimizer ....................... True
+  use_flash_attn .................................. False
+  use_fused_weighted_squared_relu ................. False
+  use_kitchen_attention ........................... False
+  use_legacy_models ............................... False
+  use_legacy_static_engine ........................ False
+  use_mamba_mem_eff_path .......................... True
+  use_megatron_fsdp ............................... False
+  use_mp_args_from_checkpoint_args ................ False
+  use_one_sent_docs ............................... False
+  use_persistent_ckpt_worker ...................... False
+  use_precision_aware_optimizer ................... False
+  use_pytorch_profiler ............................ False
+  use_ring_exchange_p2p ........................... False
+  use_rope_scaling ................................ False
+  use_rotary_position_embeddings .................. False
+  use_sharp ....................................... False
+  use_te_activation_func .......................... False
+  use_tokenizer_model_from_checkpoint_args ........ True
+  use_torch_fsdp2 ................................. False
+  use_torch_optimizer_for_cpu_offload ............. False
+  use_tp_pp_dp_mapping ............................ False
+  v_head_dim ...................................... 128
+  valid_data_path ................................. None
+  variable_seq_lengths ............................ False
+  virtual_pipeline_model_parallel_size ............ None
+  vision_backbone_type ............................ vit
+  vision_pretraining .............................. False
+  vision_pretraining_type ......................... classify
+  vocab_extra_ids ................................. 0
+  vocab_file ...................................... None
+  vocab_size ...................................... 128256
+  wandb_entity .................................... None
+  wandb_exp_name .................................. None
+  wandb_project ................................... None
+  wandb_save_dir .................................. None
+  weight_decay .................................... 0.1
+  weight_decay_incr_style ......................... constant
+  wgrad_deferral_limit ............................ 0
+  window_attn_skip_freq ........................... None
+  window_size ..................................... None
+  world_size ...................................... 128
+  yaml_cfg ........................................ None
+-------------------- end of arguments ---------------------
+INFO:megatron.core.num_microbatches_calculator:setting number of microbatches to constant 4
+> building NullTokenizer tokenizer ...
+WARNING:megatron.core.datasets.megatron_tokenizer:You're using the legacy tokenizer system, which is deprecated and will be removed in a future release. Please migrate to the new tokenizer system (`megatron.core.tokenizers.MegatronTokenizer`).
+ > padded vocab (size: 128257) with 127 dummy tokens (new size: 128384)
+WARNING:megatron.core.rerun_state_machine:RerunStateMachine initialized in mode RerunMode.VALIDATE_RESULTS
+> initializing torch distributed ...
+WARNING: TensorBoard writing requested but is not available (are you using PyTorch 1.1.0 or later?), no TensorBoard logs will be written.
+WARNING: one_logger package is required to enable e2e metrics tracking. please go to https://confluence.nvidia.com/display/MLWFO/Package+Repositories for details to install it
+[rank120]:[W514 12:33:45.361212649 ProcessGroupNCCL.cpp:5188] Guessing device ID based on global rank. This can cause a hang if rank to GPU mapping is heterogeneous. You can specify device_id in init_process_group()
+> initialized tensor model parallel with size 1
+> initialized pipeline model parallel with size 1
+> setting random seeds to 1234 ...
+> compiling dataset index builder ...
+[rank8]:[W514 12:33:45.502786206 ProcessGroupNCCL.cpp:5188] Guessing device ID based on global rank. This can cause a hang if rank to GPU mapping is heterogeneous. You can specify device_id in init_process_group()
+[rank16]:[W514 12:33:45.441509657 ProcessGroupNCCL.cpp:5188] Guessing device ID based on global rank. This can cause a hang if rank to GPU mapping is heterogeneous. You can specify device_id in init_process_group()
+[rank32]:[W514 12:33:45.474849967 ProcessGroupNCCL.cpp:5188] Guessing device ID based on global rank. This can cause a hang if rank to GPU mapping is heterogeneous. You can specify device_id in init_process_group()
+[rank24]:[W514 12:33:45.341390707 ProcessGroupNCCL.cpp:5188] Guessing device ID based on global rank. This can cause a hang if rank to GPU mapping is heterogeneous. You can specify device_id in init_process_group()
+[rank40]:[W514 12:33:45.073689258 ProcessGroupNCCL.cpp:5188] Guessing device ID based on global rank. This can cause a hang if rank to GPU mapping is heterogeneous. You can specify device_id in init_process_group()
+[rank56]:[W514 12:33:45.687337270 ProcessGroupNCCL.cpp:5188] Guessing device ID based on global rank. This can cause a hang if rank to GPU mapping is heterogeneous. You can specify device_id in init_process_group()
+[rank48]:[W514 12:33:45.002756965 ProcessGroupNCCL.cpp:5188] Guessing device ID based on global rank. This can cause a hang if rank to GPU mapping is heterogeneous. You can specify device_id in init_process_group()
+[rank64]:[W514 12:33:45.181704706 ProcessGroupNCCL.cpp:5188] Guessing device ID based on global rank. This can cause a hang if rank to GPU mapping is heterogeneous. You can specify device_id in init_process_group()
+[rank80]:[W514 12:33:45.798560099 ProcessGroupNCCL.cpp:5188] Guessing device ID based on global rank. This can cause a hang if rank to GPU mapping is heterogeneous. You can specify device_id in init_process_group()
+[rank104]:[W514 12:33:45.276613057 ProcessGroupNCCL.cpp:5188] Guessing device ID based on global rank. This can cause a hang if rank to GPU mapping is heterogeneous. You can specify device_id in init_process_group()
+[rank88]:[W514 12:33:45.869022765 ProcessGroupNCCL.cpp:5188] Guessing device ID based on global rank. This can cause a hang if rank to GPU mapping is heterogeneous. You can specify device_id in init_process_group()
+[rank72]:[W514 12:33:45.100381570 ProcessGroupNCCL.cpp:5188] Guessing device ID based on global rank. This can cause a hang if rank to GPU mapping is heterogeneous. You can specify device_id in init_process_group()
+[rank112]:[W514 12:33:45.716260546 ProcessGroupNCCL.cpp:5188] Guessing device ID based on global rank. This can cause a hang if rank to GPU mapping is heterogeneous. You can specify device_id in init_process_group()
+[rank96]:[W514 12:33:45.054680203 ProcessGroupNCCL.cpp:5188] Guessing device ID based on global rank. This can cause a hang if rank to GPU mapping is heterogeneous. You can specify device_id in init_process_group()
+make: Entering directory '/home/haoxuan.wang/Megatron-LM/megatron/core/datasets'
+make: Nothing to be done for 'default'.
+make: Leaving directory '/home/haoxuan.wang/Megatron-LM/megatron/core/datasets'
+>>> done with dataset index builder. Compilation time: 0.234 seconds
+> compiling and loading fused kernels ...
+/home/haoxuan.wang/.conda/envs/megatron-lm/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+[rank0]:[W514 12:33:45.551785193 ProcessGroupNCCL.cpp:5188] Guessing device ID based on global rank. This can cause a hang if rank to GPU mapping is heterogeneous. You can specify device_id in init_process_group()
+>>> done with compiling and loading fused kernels. Compilation time: 10.954 seconds
+time to initialize megatron (seconds): 29.382
+/home/haoxuan.wang/.conda/envs/megatron-lm/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+[after in-process setup and before initialize_megatron] datetime: 2026-05-14 12:33:34.380860 
+[after in-job setup and before initialize_megatron] datetime: 2026-05-14 12:33:34.419418 
+[before library-setup] datetime: 2026-05-14 12:33:16.454746
+[after library-setup] datetime: 2026-05-14 12:33:34.334022
+[before megatron-init] datetime: 2026-05-14 12:33:34.380859
+INFO:megatron.core.timers:(min, max) time across ranks (ms):
+    startup-program-entry-spread ...................: (2.55, 91.42)
+    startup-library-setup ..........................: (15791.74, 27746.56)
+    startup-program-setup ..........................: (46.75, 58.26)
+    startup-in-process-setup .......................: (0.00, 0.00)
+    startup-in-job-setup ...........................: (35.75, 39.18)
+    startup-initialize-megatron ....................: (12087.78, 23986.91)
+    startup-set-jit-fusion-options .................: (3491.05, 5258.64)
+    all-reduce-start-timestamps-tensor .............: (3.39, 1770.98)
+    startup-megatron-init-local ....................: (17386.50, 29285.08)
+    startup-megatron-init-global ...................: (45196.32, 45198.91)
+[after megatron is initialized] datetime: 2026-05-14 12:34:02.103091 
+building GPT model ...
+ > number of parameters on (tensor, pipeline) model parallel rank (0, 0): 8031576064
+INFO:megatron.core.distributed.distributed_data_parallel:Setting up DistributedDataParallel with config DistributedDataParallelConfig(grad_reduce_in_fp32=False, overlap_grad_reduce=True, overlap_param_gather=True, align_param_gather=False, use_distributed_optimizer=True, num_distributed_optimizer_instances=1, check_for_nan_in_grad=True, check_for_large_grads=False, bucket_size=128000000, pad_buckets_for_high_nccl_busbw=False, reduce_scatter_with_fp32_accumulation=False, average_in_collective=False, fp8_param_gather=False, reuse_grad_buf_for_mxfp8_param_ag=False, use_megatron_fsdp=False, use_custom_fsdp=False, data_parallel_sharding_strategy='no_shard', gradient_reduce_div_fusion=True, suggested_communication_unit_size=None, preserve_fp32_weights=True, keep_fp8_transpose_cache=False, nccl_ub=False, fsdp_double_buffer=False, outer_dp_sharding_strategy='no_shard', disable_symmetric_registration=False, fsdp_manual_registration=False, delay_wgrad_compute=False)
+INFO:megatron.core.distributed.param_and_grad_buffer:Number of buckets for gradient all-reduce / reduce-scatter: 34
+Params for bucket 1 (525860864 elements, 525860864 padded size):
+	module.output_layer.weight
+Params for bucket 2 (176168960 elements, 176168960 padded size):
+	module.decoder.final_layernorm.bias
+	module.decoder.layers.31.mlp.linear_fc1.weight
+	module.decoder.final_layernorm.weight
+	module.decoder.layers.31.mlp.linear_fc2.weight
+Params for bucket 3 (218120192 elements, 218120192 padded size):
+	module.decoder.layers.31.mlp.linear_fc1.layer_norm_weight
+	module.decoder.layers.31.self_attention.linear_qkv.layer_norm_weight
+	module.decoder.layers.30.mlp.linear_fc2.weight
+	module.decoder.layers.31.mlp.linear_fc1.layer_norm_bias
+	module.decoder.layers.31.self_attention.linear_qkv.weight
+	module.decoder.layers.31.self_attention.linear_qkv.layer_norm_bias
+	module.decoder.layers.31.self_attention.linear_proj.weight
+	module.decoder.layers.30.mlp.linear_fc1.weight
+Params for bucket 4 (218120192 elements, 218120192 padded size):
+	module.decoder.layers.30.mlp.linear_fc1.layer_norm_weight
+	module.decoder.layers.30.self_attention.linear_qkv.layer_norm_weight
+	module.decoder.layers.29.mlp.linear_fc2.weight
+	module.decoder.layers.30.mlp.linear_fc1.layer_norm_bias
+	module.decoder.layers.30.self_attention.linear_qkv.weight
+	module.decoder.layers.30.self_attention.linear_qkv.layer_norm_bias
+	module.decoder.layers.30.self_attention.linear_proj.weight
+	module.decoder.layers.29.mlp.linear_fc1.weight
+Params for bucket 5 (218120192 elements, 218120192 padded size):
+	module.decoder.layers.29.self_attention.linear_qkv.layer_norm_weight
+	module.decoder.layers.29.mlp.linear_fc1.layer_norm_weight
+	module.decoder.layers.28.mlp.linear_fc2.weight
+	module.decoder.layers.29.mlp.linear_fc1.layer_norm_bias
+	module.decoder.layers.29.self_attention.linear_qkv.weight
+	module.decoder.layers.29.self_attention.linear_qkv.layer_norm_bias
+	module.decoder.layers.29.self_attention.linear_proj.weight
+	module.decoder.layers.28.mlp.linear_fc1.weight
+Params for bucket 6 (218120192 elements, 218120192 padded size):
+	module.decoder.layers.28.self_attention.linear_qkv.layer_norm_weight
+	module.decoder.layers.28.mlp.linear_fc1.layer_norm_weight
+	module.decoder.layers.27.mlp.linear_fc2.weight
+	module.decoder.layers.28.mlp.linear_fc1.layer_norm_bias
+	module.decoder.layers.28.self_attention.linear_qkv.weight
+	module.decoder.layers.28.self_attention.linear_qkv.layer_norm_bias
+	module.decoder.layers.28.self_attention.linear_proj.weight
+	module.decoder.layers.27.mlp.linear_fc1.weight
+Params for bucket 7 (218120192 elements, 218120192 padded size):
+	module.decoder.layers.27.self_attention.linear_qkv.layer_norm_weight
+	module.decoder.layers.27.mlp.linear_fc1.layer_norm_weight
+	module.decoder.layers.26.mlp.linear_fc2.weight
+	module.decoder.layers.27.mlp.linear_fc1.layer_norm_bias
+	module.decoder.layers.27.self_attention.linear_qkv.weight
+	module.decoder.layers.27.self_attention.linear_qkv.layer_norm_bias
+	module.decoder.layers.27.self_attention.linear_proj.weight
+	module.decoder.layers.26.mlp.linear_fc1.weight
+Params for bucket 8 (218120192 elements, 218120192 padded size):
+	module.decoder.layers.26.mlp.linear_fc1.layer_norm_weight
+	module.decoder.layers.26.self_attention.linear_qkv.layer_norm_weight
+	module.decoder.layers.25.mlp.linear_fc2.weight
+	module.decoder.layers.26.mlp.linear_fc1.layer_norm_bias
+	module.decoder.layers.26.self_attention.linear_qkv.weight
+	module.decoder.layers.26.self_attention.linear_qkv.layer_norm_bias
+	module.decoder.layers.26.self_attention.linear_proj.weight
+	module.decoder.layers.25.mlp.linear_fc1.weight
+Params for bucket 9 (218120192 elements, 218120192 padded size):
+	module.decoder.layers.25.self_attention.linear_qkv.layer_norm_weight
+	module.decoder.layers.25.mlp.linear_fc1.layer_norm_weight
+	module.decoder.layers.25.self_attention.linear_proj.weight
+	module.decoder.layers.24.mlp.linear_fc1.weight
+	module.decoder.layers.25.mlp.linear_fc1.layer_norm_bias
+	module.decoder.layers.25.self_attention.linear_qkv.weight
+	module.decoder.layers.25.self_attention.linear_qkv.layer_norm_bias
+	module.decoder.layers.24.mlp.linear_fc2.weight
+Params for bucket 10 (218120192 elements, 218120192 padded size):
+	module.decoder.layers.24.mlp.linear_fc1.layer_norm_bias
+	module.decoder.layers.24.self_attention.linear_qkv.weight
+	module.decoder.layers.24.self_attention.linear_qkv.layer_norm_bias
+	module.decoder.layers.24.self_attention.linear_proj.weight
+	module.decoder.layers.23.mlp.linear_fc1.weight
+	module.decoder.layers.24.mlp.linear_fc1.layer_norm_weight
+	module.decoder.layers.24.self_attention.linear_qkv.layer_norm_weight
+	module.decoder.layers.23.mlp.linear_fc2.weight
+Params for bucket 11 (218120192 elements, 218120192 padded size):
+	module.decoder.layers.23.mlp.linear_fc1.layer_norm_bias
+	module.decoder.layers.23.self_attention.linear_qkv.layer_norm_weight
+	module.decoder.layers.22.mlp.linear_fc2.weight
+	module.decoder.layers.23.mlp.linear_fc1.layer_norm_weight
+	module.decoder.layers.23.self_attention.linear_qkv.weight
+	module.decoder.layers.23.self_attention.linear_qkv.layer_norm_bias
+	module.decoder.layers.23.self_attention.linear_proj.weight
+	module.decoder.layers.22.mlp.linear_fc1.weight
+Params for bucket 12 (218120192 elements, 218120192 padded size):
+	module.decoder.layers.22.mlp.linear_fc1.layer_norm_weight
+	module.decoder.layers.22.self_attention.linear_qkv.layer_norm_weight
+	module.decoder.layers.21.mlp.linear_fc2.weight
+	module.decoder.layers.22.mlp.linear_fc1.layer_norm_bias
+	module.decoder.layers.22.self_attention.linear_qkv.weight
+	module.decoder.layers.22.self_attention.linear_qkv.layer_norm_bias
+	module.decoder.layers.22.self_attention.linear_proj.weight
+	module.decoder.layers.21.mlp.linear_fc1.weight
+Params for bucket 13 (218120192 elements, 218120192 padded size):
+	module.decoder.layers.21.mlp.linear_fc1.layer_norm_weight
+	module.decoder.layers.21.self_attention.linear_qkv.layer_norm_weight
+	module.decoder.layers.20.mlp.linear_fc2.weight
+	module.decoder.layers.21.mlp.linear_fc1.layer_norm_bias
+	module.decoder.layers.21.self_attention.linear_qkv.weight
+	module.decoder.layers.21.self_attention.linear_qkv.layer_norm_bias
+	module.decoder.layers.21.self_attention.linear_proj.weight
+	module.decoder.layers.20.mlp.linear_fc1.weight
+Params for bucket 14 (218120192 elements, 218120192 padded size):
+	module.decoder.layers.20.mlp.linear_fc1.layer_norm_weight
+	module.decoder.layers.20.self_attention.linear_qkv.layer_norm_weight
+	module.decoder.layers.19.mlp.linear_fc1.weight
+	module.decoder.layers.20.mlp.linear_fc1.layer_norm_bias
+	module.decoder.layers.20.self_attention.linear_qkv.weight
+	module.decoder.layers.20.self_attention.linear_qkv.layer_norm_bias
+	module.decoder.layers.20.self_attention.linear_proj.weight
+	module.decoder.layers.19.mlp.linear_fc2.weight
+Params for bucket 15 (218120192 elements, 218120192 padded size):
+	module.decoder.layers.19.mlp.linear_fc1.layer_norm_bias
+	module.decoder.layers.19.self_attention.linear_qkv.layer_norm_bias
+	module.decoder.layers.19.self_attention.linear_qkv.weight
+	module.decoder.layers.19.self_attention.linear_proj.weight
+	module.decoder.layers.18.mlp.linear_fc1.weight
+	module.decoder.layers.19.self_attention.linear_qkv.layer_norm_weight
+	module.decoder.layers.19.mlp.linear_fc1.layer_norm_weight
+	module.decoder.layers.18.mlp.linear_fc2.weight
+Params for bucket 16 (218120192 elements, 218120192 padded size):
+	module.decoder.layers.18.mlp.linear_fc1.layer_norm_bias
+	module.decoder.layers.18.self_attention.linear_qkv.layer_norm_bias
+	module.decoder.layers.18.self_attention.linear_qkv.weight
+	module.decoder.layers.18.self_attention.linear_proj.weight
+	module.decoder.layers.17.mlp.linear_fc1.weight
+	module.decoder.layers.18.mlp.linear_fc1.layer_norm_weight
+	module.decoder.layers.18.self_attention.linear_qkv.layer_norm_weight
+	module.decoder.layers.17.mlp.linear_fc2.weight
+Params for bucket 17 (218120192 elements, 218120192 padded size):
+	module.decoder.layers.17.mlp.linear_fc1.layer_norm_bias
+	module.decoder.layers.17.self_attention.linear_qkv.layer_norm_bias
+	module.decoder.layers.17.self_attention.linear_qkv.weight
+	module.decoder.layers.17.self_attention.linear_proj.weight
+	module.decoder.layers.16.mlp.linear_fc1.weight
+	module.decoder.layers.17.self_attention.linear_qkv.layer_norm_weight
+	module.decoder.layers.17.mlp.linear_fc1.layer_norm_weight
+	module.decoder.layers.16.mlp.linear_fc2.weight
+Params for bucket 18 (218120192 elements, 218120192 padded size):
+	module.decoder.layers.16.mlp.linear_fc1.layer_norm_bias
+	module.decoder.layers.16.self_attention.linear_qkv.weight
+	module.decoder.layers.16.self_attention.linear_qkv.layer_norm_bias
+	module.decoder.layers.15.mlp.linear_fc2.weight
+	module.decoder.layers.16.mlp.linear_fc1.layer_norm_weight
+	module.decoder.layers.16.self_attention.linear_qkv.layer_norm_weight
+	module.decoder.layers.16.self_attention.linear_proj.weight
+	module.decoder.layers.15.mlp.linear_fc1.weight
+Params for bucket 19 (218120192 elements, 218120192 padded size):
+	module.decoder.layers.15.self_attention.linear_qkv.layer_norm_weight
+	module.decoder.layers.15.mlp.linear_fc1.layer_norm_weight
+	module.decoder.layers.14.mlp.linear_fc2.weight
+	module.decoder.layers.15.mlp.linear_fc1.layer_norm_bias
+	module.decoder.layers.15.self_attention.linear_qkv.layer_norm_bias
+	module.decoder.layers.15.self_attention.linear_qkv.weight
+	module.decoder.layers.15.self_attention.linear_proj.weight
+	module.decoder.layers.14.mlp.linear_fc1.weight
+Params for bucket 20 (218120192 elements, 218120192 padded size):
+	module.decoder.layers.14.self_attention.linear_qkv.layer_norm_weight
+	module.decoder.layers.14.mlp.linear_fc1.layer_norm_weight
+	module.decoder.layers.13.mlp.linear_fc2.weight
+	module.decoder.layers.14.mlp.linear_fc1.layer_norm_bias
+	module.decoder.layers.14.self_attention.linear_qkv.layer_norm_bias
+	module.decoder.layers.14.self_attention.linear_qkv.weight
+	module.decoder.layers.14.self_attention.linear_proj.weight
+	module.decoder.layers.13.mlp.linear_fc1.weight
+Params for bucket 21 (218120192 elements, 218120192 padded size):
+	module.decoder.layers.13.self_attention.linear_qkv.layer_norm_weight
+	module.decoder.layers.13.mlp.linear_fc1.layer_norm_weight
+	module.decoder.layers.12.mlp.linear_fc2.weight
+	module.decoder.layers.13.mlp.linear_fc1.layer_norm_bias
+	module.decoder.layers.13.self_attention.linear_qkv.layer_norm_bias
+	module.decoder.layers.13.self_attention.linear_qkv.weight
+	module.decoder.layers.13.self_attention.linear_proj.weight
+	module.decoder.layers.12.mlp.linear_fc1.weight
+Params for bucket 22 (218120192 elements, 218120192 padded size):
+	module.decoder.layers.12.self_attention.linear_qkv.layer_norm_weight
+	module.decoder.layers.12.mlp.linear_fc1.layer_norm_weight
+	module.decoder.layers.11.mlp.linear_fc2.weight
+	module.decoder.layers.12.mlp.linear_fc1.layer_norm_bias
+	module.decoder.layers.12.self_attention.linear_qkv.layer_norm_bias
+	module.decoder.layers.12.self_attention.linear_qkv.weight
+	module.decoder.layers.12.self_attention.linear_proj.weight
+	module.decoder.layers.11.mlp.linear_fc1.weight
+Params for bucket 23 (218120192 elements, 218120192 padded size):
+	module.decoder.layers.11.self_attention.linear_qkv.layer_norm_weight
+	module.decoder.layers.11.mlp.linear_fc1.layer_norm_weight
+	module.decoder.layers.11.self_attention.linear_proj.weight
+	module.decoder.layers.10.mlp.linear_fc1.weight
+	module.decoder.layers.11.mlp.linear_fc1.layer_norm_bias
+	module.decoder.layers.11.self_attention.linear_qkv.layer_norm_bias
+	module.decoder.layers.11.self_attention.linear_qkv.weight
+	module.decoder.layers.10.mlp.linear_fc2.weight
+Params for bucket 24 (218120192 elements, 218120192 padded size):
+	module.decoder.layers.10.mlp.linear_fc1.layer_norm_bias
+	module.decoder.layers.10.self_attention.linear_qkv.layer_norm_bias
+	module.decoder.layers.10.self_attention.linear_qkv.weight
+	module.decoder.layers.10.self_attention.linear_proj.weight
+	module.decoder.layers.9.mlp.linear_fc1.weight
+	module.decoder.layers.10.mlp.linear_fc1.layer_norm_weight
+	module.decoder.layers.10.self_attention.linear_qkv.layer_norm_weight
+	module.decoder.layers.9.mlp.linear_fc2.weight
+Params for bucket 25 (218120192 elements, 218120192 padded size):
+	module.decoder.layers.9.mlp.linear_fc1.layer_norm_bias
+	module.decoder.layers.9.self_attention.linear_qkv.layer_norm_bias
+	module.decoder.layers.9.self_attention.linear_qkv.weight
+	module.decoder.layers.9.self_attention.linear_proj.weight
+	module.decoder.layers.8.mlp.linear_fc1.weight
+	module.decoder.layers.9.self_attention.linear_qkv.layer_norm_weight
+	module.decoder.layers.9.mlp.linear_fc1.layer_norm_weight
+	module.decoder.layers.8.mlp.linear_fc2.weight
+Params for bucket 26 (218120192 elements, 218120192 padded size):
+	module.decoder.layers.8.mlp.linear_fc1.layer_norm_bias
+	module.decoder.layers.8.self_attention.linear_qkv.layer_norm_bias
+	module.decoder.layers.8.self_attention.linear_qkv.weight
+	module.decoder.layers.8.self_attention.linear_proj.weight
+	module.decoder.layers.7.mlp.linear_fc1.weight
+	module.decoder.layers.8.self_attention.linear_qkv.layer_norm_weight
+	module.decoder.layers.8.mlp.linear_fc1.layer_norm_weight
+	module.decoder.layers.7.mlp.linear_fc2.weight
+Params for bucket 27 (218120192 elements, 218120192 padded size):
+	module.decoder.layers.7.mlp.linear_fc1.layer_norm_bias
+	module.decoder.layers.7.self_attention.linear_qkv.layer_norm_bias
+	module.decoder.layers.7.self_attention.linear_qkv.weight
+	module.decoder.layers.7.self_attention.linear_proj.weight
+	module.decoder.layers.6.mlp.linear_fc1.weight
+	module.decoder.layers.7.mlp.linear_fc1.layer_norm_weight
+	module.decoder.layers.7.self_attention.linear_qkv.layer_norm_weight
+	module.decoder.layers.6.mlp.linear_fc2.weight
+Params for bucket 28 (218120192 elements, 218120192 padded size):
+	module.decoder.layers.6.mlp.linear_fc1.layer_norm_bias
+	module.decoder.layers.6.self_attention.linear_qkv.weight
+	module.decoder.layers.6.self_attention.linear_qkv.layer_norm_bias
+	module.decoder.layers.6.self_attention.linear_proj.weight
+	module.decoder.layers.5.mlp.linear_fc1.weight
+	module.decoder.layers.6.self_attention.linear_qkv.layer_norm_weight
+	module.decoder.layers.6.mlp.linear_fc1.layer_norm_weight
+	module.decoder.layers.5.mlp.linear_fc2.weight
+Params for bucket 29 (218120192 elements, 218120192 padded size):
+	module.decoder.layers.5.mlp.linear_fc1.layer_norm_weight
+	module.decoder.layers.5.self_attention.linear_qkv.weight
+	module.decoder.layers.5.self_attention.linear_qkv.layer_norm_bias
+	module.decoder.layers.5.self_attention.linear_proj.weight
+	module.decoder.layers.4.mlp.linear_fc1.weight
+	module.decoder.layers.5.mlp.linear_fc1.layer_norm_bias
+	module.decoder.layers.5.self_attention.linear_qkv.layer_norm_weight
+	module.decoder.layers.4.mlp.linear_fc2.weight
+Params for bucket 30 (218120192 elements, 218120192 padded size):
+	module.decoder.layers.4.mlp.linear_fc1.layer_norm_bias
+	module.decoder.layers.4.self_attention.linear_qkv.layer_norm_weight
+	module.decoder.layers.3.mlp.linear_fc1.weight
+	module.decoder.layers.4.mlp.linear_fc1.layer_norm_weight
+	module.decoder.layers.4.self_attention.linear_qkv.weight
+	module.decoder.layers.4.self_attention.linear_qkv.layer_norm_bias
+	module.decoder.layers.4.self_attention.linear_proj.weight
+	module.decoder.layers.3.mlp.linear_fc2.weight
+Params for bucket 31 (218120192 elements, 218120192 padded size):
+	module.decoder.layers.3.mlp.linear_fc1.layer_norm_bias
+	module.decoder.layers.3.mlp.linear_fc1.layer_norm_weight
+	module.decoder.layers.3.self_attention.linear_qkv.weight
+	module.decoder.layers.3.self_attention.linear_qkv.layer_norm_weight
+	module.decoder.layers.3.self_attention.linear_proj.weight
+	module.decoder.layers.2.mlp.linear_fc2.weight
+	module.decoder.layers.2.mlp.linear_fc1.weight
+	module.decoder.layers.3.self_attention.linear_qkv.layer_norm_bias
+Params for bucket 32 (218120192 elements, 218120192 padded size):
+	module.decoder.layers.2.self_attention.linear_qkv.layer_norm_bias
+	module.decoder.layers.1.mlp.linear_fc2.weight
+	module.decoder.layers.1.mlp.linear_fc1.weight
+	module.decoder.layers.2.mlp.linear_fc1.layer_norm_bias
+	module.decoder.layers.2.mlp.linear_fc1.layer_norm_weight
+	module.decoder.layers.2.self_attention.linear_qkv.layer_norm_weight
+	module.decoder.layers.2.self_attention.linear_qkv.weight
+	module.decoder.layers.2.self_attention.linear_proj.weight
+Params for bucket 33 (218120192 elements, 218120192 padded size):
+	module.decoder.layers.1.mlp.linear_fc1.layer_norm_bias
+	module.decoder.layers.1.self_attention.linear_qkv.weight
+	module.decoder.layers.1.self_attention.linear_proj.weight
+	module.decoder.layers.0.mlp.linear_fc2.weight
+	module.decoder.layers.1.mlp.linear_fc1.layer_norm_weight
+	module.decoder.layers.1.self_attention.linear_qkv.layer_norm_bias
+	module.decoder.layers.1.self_attention.linear_qkv.layer_norm_weight
+	module.decoder.layers.0.mlp.linear_fc1.weight
+Params for bucket 34 (567820288 elements, 567820288 padded size):
+	module.decoder.layers.0.mlp.linear_fc1.layer_norm_weight
+	module.decoder.layers.0.self_attention.linear_qkv.layer_norm_weight
+	module.decoder.layers.0.self_attention.linear_qkv.weight
+	module.decoder.layers.0.self_attention.linear_qkv.layer_norm_bias
+	module.embedding.word_embeddings.weight
+	module.decoder.layers.0.mlp.linear_fc1.layer_norm_bias
+	module.decoder.layers.0.self_attention.linear_proj.weight
+INFO:megatron.core.optimizer:Setting up optimizer with config AdamOptimizerConfig(lr=0.00015, min_lr=1e-05, decoupled_lr=0.0005, decoupled_min_lr=4.5e-05, weight_decay=0.1, apply_wd_to_qk_layernorm=False, fp8_recipe='delayed', fp16=False, bf16=True, reuse_grad_buf_for_mxfp8_param_ag=False, params_dtype=torch.bfloat16, use_precision_aware_optimizer=False, store_param_remainders=True, main_grads_dtype=torch.float32, main_params_dtype=torch.float32, exp_avg_dtype=torch.float32, exp_avg_sq_dtype=torch.float32, optimizer='adam', loss_scale=None, initial_loss_scale=4294967296, min_loss_scale=1.0, loss_scale_window=1000, hysteresis=2, adam_beta1=0.9, adam_beta2=0.95, adam_eps=1e-08, decoupled_weight_decay=True, sgd_momentum=0.9, muon_momentum=0.9, muon_split_qkv=True, muon_use_nesterov=False, muon_scale_mode='spectral', muon_fp32_matmul_prec='medium', muon_num_ns_steps=5, muon_tp_mode='blockwise', muon_extra_scale_factor=1.0, use_distributed_optimizer=True, overlap_param_gather=True, overlap_param_gather_with_optimizer_step=False, optimizer_cpu_offload=False, optimizer_offload_fraction=1.0, use_torch_optimizer_for_cpu_offload=False, overlap_cpu_optimizer_d2h_h2d=False, pin_cpu_grads=True, pin_cpu_params=True, clip_grad=1.0, log_num_zeros_in_grad=False, barrier_with_L1_time=True, timers=<megatron.core.timers.Timers object at 0x1483401ab2c0>, config_logger_dir='')
+setting training iterations to 10
+INFO:megatron.core.optimizer_param_scheduler:> learning rate decay style: cosine
+[after model, optimizer, and learning rate scheduler are built] datetime: 2026-05-14 12:34:03.469682 
+> building train, validation, and test datasets ...
+ > datasets target sizes (minimum size):
+    train:      10240
+    validation: 0
+    test:       0
+INFO:megatron.core.datasets.blended_megatron_dataset_config:Let mock = True, as both blend and blend_per_split are None
+INFO:megatron.core.datasets.blended_megatron_dataset_config:Let split = 1,1,1, an arbitrarily even split, as mock is True
+INFO:megatron.core.datasets.blended_megatron_dataset_config:Let split_matrix = [(0, 0.3333333333333333), (0.3333333333333333, 0.6666666666666666), (0.6666666666666666, 1.0)]
+> building train, validation, and test datasets for GPT ...
+INFO:megatron.core.datasets.blended_megatron_dataset_builder:Building MockGPTDataset splits with sizes=(10240, 0, 0) and config=GPTDatasetConfig(random_seed=1234, sequence_length=4096, blend=None, blend_per_split=None, multiple_validation_sets=False, full_validation=False, split='1,1,1', split_matrix=[(0, 0.3333333333333333), (0.3333333333333333, 0.6666666666666666), (0.6666666666666666, 1.0)], num_dataset_builder_threads=1, path_to_cache='/projects_vol/gp_chen.wang/hxwang/scratch/benchmark_cache_llama3_8b_bf16', mmap_bin_files=False, mock=True, tokenizer=<megatron.core.tokenizers.text.models.default_tokenizer.DefaultTokenizerText object at 0x1482ec109a30>, mid_level_dataset_surplus=0.005, allow_ambiguous_pad_tokens=False, fast_cache_load=False, defer_npy_index_mmap=False, reset_position_ids=False, reset_attention_mask=False, eod_mask_loss=False, create_attention_mask=False, drop_last_partial_validation_sequence=True, add_extra_token_to_sequence=True, object_storage_cache_path=None, data_parallel_size=128, sequence_parallel_size=0, hybrid_context_parallel=False, sequences_per_dataset=None, token_dtype_code=4, context_parallel_size=1)
+INFO:megatron.core.datasets.gpt_dataset:Load the MockGPTDataset train indices
+INFO:megatron.core.datasets.gpt_dataset:	Load the document index from 54bacf1c9362181aaba1ff1670c9cfcd-MockGPTDataset-train-document_index.npy
+INFO:megatron.core.datasets.gpt_dataset:	Load the sample index from 54bacf1c9362181aaba1ff1670c9cfcd-MockGPTDataset-train-sample_index.npy
+INFO:megatron.core.datasets.gpt_dataset:	Load the shuffle index from 54bacf1c9362181aaba1ff1670c9cfcd-MockGPTDataset-train-shuffle_index.npy
+INFO:megatron.core.datasets.gpt_dataset:> total number of samples: 16648
+INFO:megatron.core.datasets.gpt_dataset:Load the MockGPTDataset valid indices
+INFO:megatron.core.datasets.gpt_dataset:	Load the document index from f477deeeb6b737fe69d2d58790838fc9-MockGPTDataset-valid-document_index.npy
+INFO:megatron.core.datasets.gpt_dataset:	Load the sample index from f477deeeb6b737fe69d2d58790838fc9-MockGPTDataset-valid-sample_index.npy
+INFO:megatron.core.datasets.gpt_dataset:	Load the shuffle index from f477deeeb6b737fe69d2d58790838fc9-MockGPTDataset-valid-shuffle_index.npy
+INFO:megatron.core.datasets.gpt_dataset:> total number of samples: 16640
+INFO:megatron.core.datasets.gpt_dataset:Load the MockGPTDataset test indices
+INFO:megatron.core.datasets.gpt_dataset:	Load the document index from b412d870e71cb995c49d942827b8a13e-MockGPTDataset-test-document_index.npy
+INFO:megatron.core.datasets.gpt_dataset:	Load the sample index from b412d870e71cb995c49d942827b8a13e-MockGPTDataset-test-sample_index.npy
+INFO:megatron.core.datasets.gpt_dataset:	Load the shuffle index from b412d870e71cb995c49d942827b8a13e-MockGPTDataset-test-shuffle_index.npy
+INFO:megatron.core.datasets.gpt_dataset:> total number of samples: 16671
+> finished creating GPT datasets ...
+[after dataloaders are built] datetime: 2026-05-14 12:34:03.574291 
+done with setup ...
+training ...
+INFO:megatron.core.timers:(min, max) time across ranks (ms):
+    model-and-optimizer-setup ......................: (1363.13, 1364.84)
+    train/valid/test-data-iterators-setup ..........: (71.04, 102.45)
+Overwriting rerun_state_machine.current_iteration from -1 to 0...
+[before the start of training step] datetime: 2026-05-14 12:34:03.599307 
+WARNING:megatron.core.rerun_state_machine:Result validation enabled
+/home/haoxuan.wang/Megatron-LM/megatron/core/pipeline_parallel/schedules.py:189: UserWarning: The AccumulateGrad node's stream does not match the stream of the node that produced the incoming gradient. This may incur unnecessary synchronization and break CUDA graph capture if the AccumulateGrad node's stream is the default stream. This mismatch is caused by an AccumulateGrad node created prior to the current iteration being kept alive. This can happen if the autograd graph is still being kept alive by tensors such as the loss, or if you are using DDP, which will stash a reference to the node. To resolve the mismatch, delete all references to the autograd graph or ensure that DDP initialization is performed under the same stream as subsequent forwards. If the mismatch is intentional, you can use torch.autograd.graph.set_warn_on_accumulate_grad_stream_mismatch(False) to suppress this warning. (Triggered internally at /pytorch/torch/csrc/autograd/input_buffer.cpp:240.)
+  Variable._execution_engine.run_backward(
+/home/haoxuan.wang/.conda/envs/megatron-lm/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+Number of parameters in transformer block in billions:  6.98
+Number of parameters in embedding layers in billions: 1.05
+Total number of parameters in billions: 8.03
+Number of parameters in most loaded shard in billions: 8.0316
+compute_activation_memory_without_sp
+Activation memory footprint per transformer layer (precise, without SP): 1088.0 MB
+Theoretical memory footprints: weight and optimizer=46675.13 MB, activation=38763.97 MB, total=85439.09 MB
+
+ [2026-05-14 12:34:43.749581] iteration        1/      10 | consumed samples:         1024 | elapsed time per iteration (ms): 40149.5 | throughput per GPU (TFLOP/s/GPU): 39.4 | learning rate: 3.932158E-08 | global batch size:  1024 | lm loss: 1.213934E+01 | loss scale: 1.0 | grad norm: 23.210 | number of skipped iterations:   0 | number of nan iterations:   0 |
+[Rank 0] (after 1 iterations) memory (MB) | allocated: 33117.27 | max allocated: 77407.83 | reserved: 37496.00 | max reserved: 84004.00
+Number of parameters in transformer block in billions:  6.98
+Number of parameters in embedding layers in billions: 1.05
+Total number of parameters in billions: 8.03
+Number of parameters in most loaded shard in billions: 8.0316
+compute_activation_memory_without_sp
+Activation memory footprint per transformer layer (precise, without SP): 1088.0 MB
+Theoretical memory footprints: weight and optimizer=46675.13 MB, activation=38763.97 MB, total=85439.09 MB
+
+ [2026-05-14 12:34:47.783320] iteration        2/      10 | consumed samples:         2048 | elapsed time per iteration (ms): 22091.1 | throughput per GPU (TFLOP/s/GPU): 71.6 | learning rate: 7.864316E-08 | global batch size:  1024 | lm loss: 1.213952E+01 | loss scale: 1.0 | grad norm: 23.257 | number of skipped iterations:   0 | number of nan iterations:   0 |
+[Rank 0] (after 2 iterations) memory (MB) | allocated: 33117.27 | max allocated: 77887.66 | reserved: 37498.00 | max reserved: 84004.00
+ [2026-05-14 12:34:51.764187] iteration        3/      10 | consumed samples:         3072 | elapsed time per iteration (ms): 3979.7 | throughput per GPU (TFLOP/s/GPU): 397.3 | learning rate: 1.179647E-07 | global batch size:  1024 | lm loss: 1.213973E+01 | loss scale: 1.0 | grad norm: 23.092 | number of skipped iterations:   0 | number of nan iterations:   0 |
+ [2026-05-14 12:34:55.520141] iteration        4/      10 | consumed samples:         4096 | elapsed time per iteration (ms): 3755.2 | throughput per GPU (TFLOP/s/GPU): 421.1 | learning rate: 1.572863E-07 | global batch size:  1024 | lm loss: 1.213874E+01 | loss scale: 1.0 | grad norm: 23.100 | number of skipped iterations:   0 | number of nan iterations:   0 |
+ [2026-05-14 12:34:59.189556] iteration        5/      10 | consumed samples:         5120 | elapsed time per iteration (ms): 3668.3 | throughput per GPU (TFLOP/s/GPU): 431.0 | learning rate: 1.966079E-07 | global batch size:  1024 | lm loss: 1.213631E+01 | loss scale: 1.0 | grad norm: 23.201 | number of skipped iterations:   0 | number of nan iterations:   0 |
+ [2026-05-14 12:35:03.007375] iteration        6/      10 | consumed samples:         6144 | elapsed time per iteration (ms): 3817.0 | throughput per GPU (TFLOP/s/GPU): 414.2 | learning rate: 2.359295E-07 | global batch size:  1024 | lm loss: 1.212524E+01 | loss scale: 1.0 | grad norm: 23.166 | number of skipped iterations:   0 | number of nan iterations:   0 |
+ [2026-05-14 12:35:06.730173] iteration        7/      10 | consumed samples:         7168 | elapsed time per iteration (ms): 3721.7 | throughput per GPU (TFLOP/s/GPU): 424.8 | learning rate: 2.752511E-07 | global batch size:  1024 | lm loss: 1.209473E+01 | loss scale: 1.0 | grad norm: 23.129 | number of skipped iterations:   0 | number of nan iterations:   0 |
+ [2026-05-14 12:35:10.538367] iteration        8/      10 | consumed samples:         8192 | elapsed time per iteration (ms): 3807.4 | throughput per GPU (TFLOP/s/GPU): 415.3 | learning rate: 3.145726E-07 | global batch size:  1024 | lm loss: 1.208379E+01 | loss scale: 1.0 | grad norm: 23.335 | number of skipped iterations:   0 | number of nan iterations:   0 |
+ [2026-05-14 12:35:14.571712] iteration        9/      10 | consumed samples:         9216 | elapsed time per iteration (ms): 4032.2 | throughput per GPU (TFLOP/s/GPU): 392.1 | learning rate: 3.538942E-07 | global batch size:  1024 | lm loss: 1.196611E+01 | loss scale: 1.0 | grad norm: 23.227 | number of skipped iterations:   0 | number of nan iterations:   0 |
+ [2026-05-14 12:35:18.536707] iteration       10/      10 | consumed samples:        10240 | elapsed time per iteration (ms): 3964.1 | throughput per GPU (TFLOP/s/GPU): 398.9 | learning rate: 3.932158E-07 | global batch size:  1024 | lm loss: 1.194951E+01 | loss scale: 1.0 | grad norm: 23.230 | number of skipped iterations:   0 | number of nan iterations:   0 |
+[after training is done] datetime: 2026-05-14 12:35:18.845247 
+[rank120]:[W514 12:35:20.205923728 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank56]:[W514 12:35:20.553811674 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank32]:[W514 12:35:20.364829040 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank16]:[W514 12:35:20.338457351 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank8]:[W514 12:35:20.411945973 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank96]:[W514 12:35:20.965581083 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank48]:[W514 12:35:20.948018649 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank40]:[W514 12:35:20.024393811 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank0]:[W514 12:35:20.271406657 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank112]:[W514 12:35:20.684070043 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank24]:[W514 12:35:20.349483547 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank72]:[W514 12:35:20.112813701 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank64]:[W514 12:35:20.198938550 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank104]:[W514 12:35:20.299122920 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank88]:[W514 12:35:20.961815411 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank80]:[W514 12:35:20.984622439 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank1]:[W514 12:35:21.808284948 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank2]:[W514 12:35:21.818351163 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank3]:[W514 12:35:21.828407314 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank4]:[W514 12:35:21.838480311 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank5]:[W514 12:35:21.848516837 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank6]:[W514 12:35:21.858594141 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank7]:[W514 12:35:21.868635159 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank9]:[W514 12:35:21.084308198 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank10]:[W514 12:35:21.094374462 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank11]:[W514 12:35:21.104451621 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank12]:[W514 12:35:21.114526804 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank13]:[W514 12:35:21.124551323 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank14]:[W514 12:35:21.134611331 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank15]:[W514 12:35:21.144717611 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank17]:[W514 12:35:21.102888825 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank18]:[W514 12:35:21.112963062 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank19]:[W514 12:35:21.122995254 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank20]:[W514 12:35:21.133096116 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank21]:[W514 12:35:21.143135308 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank22]:[W514 12:35:21.153178247 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank23]:[W514 12:35:21.163240204 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank25]:[W514 12:35:21.082646564 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank26]:[W514 12:35:21.092705423 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank27]:[W514 12:35:21.102765127 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank28]:[W514 12:35:21.112854182 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank29]:[W514 12:35:21.122883168 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank30]:[W514 12:35:21.132963392 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank31]:[W514 12:35:21.143005424 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank33]:[W514 12:35:21.296870067 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank34]:[W514 12:35:22.306919342 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank35]:[W514 12:35:22.316980499 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank36]:[W514 12:35:22.327032311 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank37]:[W514 12:35:22.337055024 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank38]:[W514 12:35:22.347105501 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank39]:[W514 12:35:22.357203737 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank41]:[W514 12:35:22.975573676 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank42]:[W514 12:35:22.985684957 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank43]:[W514 12:35:22.995681686 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank44]:[W514 12:35:22.005733331 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank45]:[W514 12:35:22.015797673 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank46]:[W514 12:35:22.025889311 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank47]:[W514 12:35:22.035897156 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank49]:[W514 12:35:22.981218401 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank50]:[W514 12:35:22.993893864 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank51]:[W514 12:35:22.009943080 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank52]:[W514 12:35:22.009999395 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank53]:[W514 12:35:22.010114074 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank54]:[W514 12:35:22.020192951 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank55]:[W514 12:35:22.020214961 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank58]:[W514 12:35:22.714986212 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank57]:[W514 12:35:22.715202251 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank60]:[W514 12:35:22.725027672 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank61]:[W514 12:35:22.725112967 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank59]:[W514 12:35:22.725287873 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank63]:[W514 12:35:22.735300721 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank62]:[W514 12:35:22.735408422 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank65]:[W514 12:35:22.234944717 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank67]:[W514 12:35:22.234957445 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank66]:[W514 12:35:22.234978748 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank68]:[W514 12:35:22.244980930 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank69]:[W514 12:35:22.245089354 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank70]:[W514 12:35:22.255109979 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank71]:[W514 12:35:22.255164919 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank73]:[W514 12:35:22.183776919 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank74]:[W514 12:35:22.183828327 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank76]:[W514 12:35:22.193845538 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank75]:[W514 12:35:22.193870713 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank77]:[W514 12:35:22.193879629 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank78]:[W514 12:35:22.203919452 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank79]:[W514 12:35:22.203962100 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank81]:[W514 12:35:22.912327326 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank82]:[W514 12:35:22.912382103 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank84]:[W514 12:35:22.912396154 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank83]:[W514 12:35:22.912547816 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank85]:[W514 12:35:22.922341595 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank87]:[W514 12:35:22.922571584 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank86]:[W514 12:35:22.922582893 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank89]:[W514 12:35:22.013112538 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank90]:[W514 12:35:22.013269747 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank91]:[W514 12:35:22.023145003 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank92]:[W514 12:35:22.023146571 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank94]:[W514 12:35:22.023149081 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank93]:[W514 12:35:22.023240052 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank95]:[W514 12:35:22.023282127 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank97]:[W514 12:35:22.215493317 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank98]:[W514 12:35:22.215526826 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank99]:[W514 12:35:22.215658500 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank102]:[W514 12:35:22.225642281 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank100]:[W514 12:35:22.225644861 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank103]:[W514 12:35:22.225682300 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank101]:[W514 12:35:22.225739956 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank105]:[W514 12:35:22.461315244 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank107]:[W514 12:35:22.461329626 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank106]:[W514 12:35:22.461347522 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank108]:[W514 12:35:22.471439127 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank109]:[W514 12:35:22.471474923 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank111]:[W514 12:35:22.471505797 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank110]:[W514 12:35:22.471528921 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank113]:[W514 12:35:22.921110401 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank114]:[W514 12:35:22.921153909 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank115]:[W514 12:35:22.931209659 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank117]:[W514 12:35:22.931285219 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank116]:[W514 12:35:22.931300588 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank118]:[W514 12:35:22.931320492 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank119]:[W514 12:35:22.931321735 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank121]:[W514 12:35:22.609182484 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank122]:[W514 12:35:22.609204027 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank123]:[W514 12:35:22.609256403 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank124]:[W514 12:35:22.609303475 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank125]:[W514 12:35:22.609321376 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank126]:[W514 12:35:22.609343931 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[rank127]:[W514 12:35:22.609376550 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[W514 12:35:33.620467654 TCPStore.cpp:115] [c10d] recvVector failed on SocketImpl(fd=70, addr=[hpc-gaas-g19]:59346, remote=[hpc-gaas-g08]:29500): Connection reset by peer
+Exception raised from recvBytes at /pytorch/torch/csrc/distributed/c10d/Utils.hpp:679 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) + 0x9d (0x151dd78ad05d in /home/haoxuan.wang/.conda/envs/megatron-lm/lib/python3.12/site-packages/torch/lib/libc10.so)
+frame #1: <unknown function> + 0x6a90692 (0x151df604e692 in /home/haoxuan.wang/.conda/envs/megatron-lm/lib/python3.12/site-packages/torch/lib/libtorch_cpu.so)
+frame #2: <unknown function> + 0x6a92746 (0x151df6050746 in /home/haoxuan.wang/.conda/envs/megatron-lm/lib/python3.12/site-packages/torch/lib/libtorch_cpu.so)
+frame #3: c10d::TCPStore::compareSet(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::vector<unsigned char, std::allocator<unsigned char> > const&, std::vector<unsigned char, std::allocator<unsigned char> > const&) + 0x1ef (0x151df604b1ff in /home/haoxuan.wang/.conda/envs/megatron-lm/lib/python3.12/site-packages/torch/lib/libtorch_cpu.so)
+frame #4: <unknown function> + 0xec315a (0x151e05b1415a in /home/haoxuan.wang/.conda/envs/megatron-lm/lib/python3.12/site-packages/torch/lib/libtorch_python.so)
+frame #5: <unknown function> + 0x411060 (0x151e05062060 in /home/haoxuan.wang/.conda/envs/megatron-lm/lib/python3.12/site-packages/torch/lib/libtorch_python.so)
+frame #6: <unknown function> + 0x21ea68 (0x55afbb8dba68 in /home/haoxuan.wang/.conda/envs/megatron-lm/bin/python3.12)
+frame #7: _PyObject_MakeTpCall + 0x2bc (0x55afbb8b255c in /home/haoxuan.wang/.conda/envs/megatron-lm/bin/python3.12)
+frame #8: <unknown function> + 0x249358 (0x55afbb906358 in /home/haoxuan.wang/.conda/envs/megatron-lm/bin/python3.12)
+frame #9: _PyEval_EvalFrameDefault + 0x4e88 (0x55afbb8c0cb8 in /home/haoxuan.wang/.conda/envs/megatron-lm/bin/python3.12)
+frame #10: _PyObject_FastCallDictTstate + 0x1ce (0x55afbb8b51de in /home/haoxuan.wang/.conda/envs/megatron-lm/bin/python3.12)
+frame #11: _PyObject_Call_Prepend + 0xe7 (0x55afbb8ec557 in /home/haoxuan.wang/.conda/envs/megatron-lm/bin/python3.12)
+frame #12: <unknown function> + 0x300859 (0x55afbb9bd859 in /home/haoxuan.wang/.conda/envs/megatron-lm/bin/python3.12)
+frame #13: _PyObject_Call + 0xb5 (0x55afbb8eeed5 in /home/haoxuan.wang/.conda/envs/megatron-lm/bin/python3.12)
+frame #14: _PyEval_EvalFrameDefault + 0x4e88 (0x55afbb8c0cb8 in /home/haoxuan.wang/.conda/envs/megatron-lm/bin/python3.12)
+frame #15: PyEval_EvalCode + 0x9f (0x55afbb9753df in /home/haoxuan.wang/.conda/envs/megatron-lm/bin/python3.12)
+frame #16: <unknown function> + 0x2f401a (0x55afbb9b101a in /home/haoxuan.wang/.conda/envs/megatron-lm/bin/python3.12)
+frame #17: <unknown function> + 0x2eec85 (0x55afbb9abc85 in /home/haoxuan.wang/.conda/envs/megatron-lm/bin/python3.12)
+frame #18: <unknown function> + 0x2ebbc0 (0x55afbb9a8bc0 in /home/haoxuan.wang/.conda/envs/megatron-lm/bin/python3.12)
+frame #19: _PyRun_SimpleFileObject + 0x1c6 (0x55afbb9a87d6 in /home/haoxuan.wang/.conda/envs/megatron-lm/bin/python3.12)
+frame #20: _PyRun_AnyFileObject + 0x44 (0x55afbb9a82d4 in /home/haoxuan.wang/.conda/envs/megatron-lm/bin/python3.12)
+frame #21: Py_RunMain + 0x39e (0x55afbb9a50de in /home/haoxuan.wang/.conda/envs/megatron-lm/bin/python3.12)
+frame #22: Py_BytesMain + 0x37 (0x55afbb95d0b7 in /home/haoxuan.wang/.conda/envs/megatron-lm/bin/python3.12)
+frame #23: <unknown function> + 0x2a610 (0x151e8c62a610 in /lib64/libc.so.6)
+frame #24: __libc_start_main + 0x80 (0x151e8c62a6c0 in /lib64/libc.so.6)
+frame #25: _start + 0x2e (0x55afbb95cf2e in /home/haoxuan.wang/.conda/envs/megatron-lm/bin/python3.12)
+
+[W514 12:35:33.332363779 TCPStore.cpp:115] [c10d] recvVector failed on SocketImpl(fd=70, addr=[hpc-gaas-g09]:34172, remote=[hpc-gaas-g08]:29500): Failed to recv, got 0 bytes. Connection was likely closed. Did the remote server shutdown or crash?
+Exception raised from recvBytes at /pytorch/torch/csrc/distributed/c10d/Utils.hpp:682 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) + 0x9d (0x15313e7cf05d in /home/haoxuan.wang/.conda/envs/megatron-lm/lib/python3.12/site-packages/torch/lib/libc10.so)
+frame #1: <unknown function> + 0x6a9061d (0x15315d00961d in /home/haoxuan.wang/.conda/envs/megatron-lm/lib/python3.12/site-packages/torch/lib/libtorch_cpu.so)
+frame #2: <unknown function> + 0x6a92746 (0x15315d00b746 in /home/haoxuan.wang/.conda/envs/megatron-lm/lib/python3.12/site-packages/torch/lib/libtorch_cpu.so)
+frame #3: c10d::TCPStore::compareSet(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::vector<unsigned char, std::allocator<unsigned char> > const&, std::vector<unsigned char, std::allocator<unsigned char> > const&) + 0x1ef (0x15315d0061ff in /home/haoxuan.wang/.conda/envs/megatron-lm/lib/python3.12/site-packages/torch/lib/libtorch_cpu.so)
+frame #4: <unknown function> + 0xec315a (0x15316cb1415a in /home/haoxuan.wang/.conda/envs/megatron-lm/lib/python3.12/site-packages/torch/lib/libtorch_python.so)
+frame #5: <unknown function> + 0x411060 (0x15316c062060 in /home/haoxuan.wang/.conda/envs/megatron-lm/lib/python3.12/site-packages/torch/lib/libtorch_python.so)
+frame #6: <unknown function> + 0x21ea68 (0x561115b2da68 in /home/haoxuan.wang/.conda/envs/megatron-lm/bin/python3.12)
+frame #7: _PyObject_MakeTpCall + 0x2bc (0x561115b0455c in /home/haoxuan.wang/.conda/envs/megatron-lm/bin/python3.12)
+frame #8: <unknown function> + 0x249358 (0x561115b58358 in /home/haoxuan.wang/.conda/envs/megatron-lm/bin/python3.12)
+frame #9: _PyEval_EvalFrameDefault + 0x4e88 (0x561115b12cb8 in /home/haoxuan.wang/.conda/envs/megatron-lm/bin/python3.12)
+frame #10: _PyObject_FastCallDictTstate + 0x1ce (0x561115b071de in /home/haoxuan.wang/.conda/envs/megatron-lm/bin/python3.12)
+frame #11: _PyObject_Call_Prepend + 0xe7 (0x561115b3e557 in /home/haoxuan.wang/.conda/envs/megatron-lm/bin/python3.12)
+frame #12: <unknown function> + 0x300859 (0x561115c0f859 in /home/haoxuan.wang/.conda/envs/megatron-lm/bin/python3.12)
+frame #13: _PyObject_Call + 0xb5 (0x561115b40ed5 in /home/haoxuan.wang/.conda/envs/megatron-lm/bin/python3.12)
+frame #14: _PyEval_EvalFrameDefault + 0x4e88 (0x561115b12cb8 in /home/haoxuan.wang/.conda/envs/megatron-lm/bin/python3.12)
+frame #15: PyEval_EvalCode + 0x9f (0x561115bc73df in /home/haoxuan.wang/.conda/envs/megatron-lm/bin/python3.12)
+frame #16: <unknown function> + 0x2f401a (0x561115c0301a in /home/haoxuan.wang/.conda/envs/megatron-lm/bin/python3.12)
+frame #17: <unknown function> + 0x2eec85 (0x561115bfdc85 in /home/haoxuan.wang/.conda/envs/megatron-lm/bin/python3.12)
+frame #18: <unknown function> + 0x2ebbc0 (0x561115bfabc0 in /home/haoxuan.wang/.conda/envs/megatron-lm/bin/python3.12)
+frame #19: _PyRun_SimpleFileObject + 0x1c6 (0x561115bfa7d6 in /home/haoxuan.wang/.conda/envs/megatron-lm/bin/python3.12)
+frame #20: _PyRun_AnyFileObject + 0x44 (0x561115bfa2d4 in /home/haoxuan.wang/.conda/envs/megatron-lm/bin/python3.12)
+frame #21: Py_RunMain + 0x39e (0x561115bf70de in /home/haoxuan.wang/.conda/envs/megatron-lm/bin/python3.12)
+frame #22: Py_BytesMain + 0x37 (0x561115baf0b7 in /home/haoxuan.wang/.conda/envs/megatron-lm/bin/python3.12)
+frame #23: <unknown function> + 0x2a610 (0x1531f342a610 in /lib64/libc.so.6)
+frame #24: __libc_start_main + 0x80 (0x1531f342a6c0 in /lib64/libc.so.6)
+frame #25: _start + 0x2e (0x561115baef2e in /home/haoxuan.wang/.conda/envs/megatron-lm/bin/python3.12)
+
+W0514 12:35:33.009000 3401073 /projects_vol/gp_chen.wang/hxwang/envs/megatron-lm/lib/python3.12/site-packages/torch/distributed/elastic/rendezvous/dynamic_rendezvous.py:1293] The node 'hpc-gaas-g19_3401073_0' has failed to shutdown the rendezvous 'none' due to an error of type RendezvousConnectionError.
+W0514 12:35:33.010000 101508 /projects_vol/gp_chen.wang/hxwang/envs/megatron-lm/lib/python3.12/site-packages/torch/distributed/elastic/rendezvous/dynamic_rendezvous.py:1293] The node 'hpc-gaas-g09_101508_0' has failed to shutdown the rendezvous 'none' due to an error of type RendezvousConnectionError.
