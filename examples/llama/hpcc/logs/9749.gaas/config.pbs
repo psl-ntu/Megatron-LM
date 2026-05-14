@@ -1,6 +1,6 @@
 #!/bin/bash
 #PBS -N megatron-train
-#PBS -l select=4:ngpus=8
+#PBS -l select=1:ngpus=8
 #PBS -l place=scatter
 #PBS -l walltime=00:30:00
 #PBS -j oe
