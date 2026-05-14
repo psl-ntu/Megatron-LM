@@ -1,6 +1,6 @@
 #!/bin/bash
 #PBS -N megatron-train
-#PBS -l select=8:ngpus=8
+#PBS -l select=4:ngpus=8
 #PBS -l place=scatter
 #PBS -l walltime=00:30:00
 #PBS -j oe
@@ -33,7 +33,7 @@ DP_SIZE=$(( NUM_NODES * GPUS_PER_NODE / (TP_SIZE * PP_SIZE) ))
 # Training
 export RECOMPUTE_LAYERS=${RECOMPUTE_LAYERS:-0}    # 0=disabled | N=recompute N layers per PP stage (full/uniform)
 export PROFILE=${PROFILE:-0}             # 0=disabled | 1=enabled (NVTX markers, use with nsys profile)
-export MICRO_BATCH_SIZE=${MICRO_BATCH_SIZE:-4}
+export MICRO_BATCH_SIZE=${MICRO_BATCH_SIZE:-2}
 GRAD_ACCUMU_STEP=128
 export GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-$(( MICRO_BATCH_SIZE * DP_SIZE * GRAD_ACCUMU_STEP ))}
 export TRAIN_SAMPLES=${TRAIN_SAMPLES:-$(( GLOBAL_BATCH_SIZE * 5 ))}
