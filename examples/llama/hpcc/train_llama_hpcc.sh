@@ -42,7 +42,14 @@ PROFILE=${PROFILE:-0}
 TOKENIZER_ARG=${TOKENIZER_ARG:-MOCK}
 DATA_ARG=${DATA_ARG:-MOCK}
 
-DATA_CACHE_PATH=${DATA_CACHE_PATH:-$SCRATCH/benchmark_cache_llama3_8b_${DTYPE}}
+# ---- Model architecture (defaults = LLaMA-3 8B) ----
+HIDDEN_SIZE=${HIDDEN_SIZE:-4096}
+FFN_HIDDEN_SIZE=${FFN_HIDDEN_SIZE:-14336}
+NUM_ATTENTION_HEADS=${NUM_ATTENTION_HEADS:-32}
+NUM_QUERY_GROUPS=${NUM_QUERY_GROUPS:-8}
+INIT_METHOD_STD=${INIT_METHOD_STD:-0.0134}
+
+DATA_CACHE_PATH=${DATA_CACHE_PATH:-$SCRATCH/benchmark_cache_llama3_${HIDDEN_SIZE}_${DTYPE}}
 mkdir -p "$DATA_CACHE_PATH"
 
 # ============================================================
@@ -58,11 +65,11 @@ DISTRIBUTED_ARGS=(
 MODEL_ARGS=(
     --use-mcore-models
     --num-layers $NUM_LAYERS
-    --hidden-size 4096
-    --ffn-hidden-size 14336
-    --num-attention-heads 32
+    --hidden-size $HIDDEN_SIZE
+    --ffn-hidden-size $FFN_HIDDEN_SIZE
+    --num-attention-heads $NUM_ATTENTION_HEADS
     --group-query-attention
-    --num-query-groups 8
+    --num-query-groups $NUM_QUERY_GROUPS
     --kv-channels 128
     --seq-length $SEQ_LENGTH
     --max-position-embeddings $SEQ_LENGTH
@@ -72,7 +79,7 @@ MODEL_ARGS=(
     --attention-dropout 0.0
     --hidden-dropout 0.0
     --swiglu
-    --init-method-std 0.0134
+    --init-method-std $INIT_METHOD_STD
     --attention-backend $ATTENTION_BACKEND
     --apply-layernorm-1p
     --untie-embeddings-and-output-weights
