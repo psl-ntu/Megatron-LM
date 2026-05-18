@@ -120,11 +120,13 @@ if [[ $ENABLE_FSDP -gt 0 ]]; then
         --use-megatron-fsdp
         --data-parallel-sharding-strategy optim_grads
     )
-    # TRAINING_ARGS+=(
-    #     --ckpt-format fsdp_dtensor
-    # )
+    TRAINING_ARGS+=(
+        --ckpt-format fsdp_dtensor
+    )
 else
-    : # --ckpt-format torch_dist  # commented out: not a valid arg in this Megatron build
+    TRAINING_ARGS+=(
+        --ckpt-format torch_dist
+    )
 fi
 
 RECOMPUTE_ARGS=()

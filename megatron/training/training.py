@@ -1334,8 +1334,9 @@ def get_model(model_provider_func, model_type=ModelType.encoder_or_decoder, wrap
                     module=model_chunk,
                     # Turn off bucketing for model_chunk 2 onwards, since communication for these
                     # model chunks is overlapped with compute anyway.
-                    disable_bucketing=(model_chunk_idx > 0)
-                    or args.overlap_param_gather_with_optimizer_step,
+                    # disable_bucketing=(model_chunk_idx > 0)
+                    # or args.overlap_param_gather_with_optimizer_step,
+                    disable_bucketing=args.overlap_param_gather_with_optimizer_step,
                 )
                 for (model_chunk_idx, model_chunk) in enumerate(model)
             ]

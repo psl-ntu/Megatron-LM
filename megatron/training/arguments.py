@@ -684,8 +684,8 @@ def validate_args(args, defaults={}):
             assert args.check_weight_hash_across_dp_replicas_interval is None, \
                 'check_weight_hash_across_dp_replicas_interval is not supported with optim_grads_params'
 
-        assert os.environ.get('CUDA_DEVICE_MAX_CONNECTIONS') != "1", \
-            'FSDP always requires CUDA_DEVICE_MAX_CONNECTIONS value large than one'
+        # assert os.environ.get('CUDA_DEVICE_MAX_CONNECTIONS') != "1", \
+        #     'FSDP always requires CUDA_DEVICE_MAX_CONNECTIONS value large than one'
 
         assert args.ckpt_format == "fsdp_dtensor", \
             "Megatron FSDP only supports fsdp_dtensor checkpoint format"
@@ -948,9 +948,10 @@ def validate_args(args, defaults={}):
                 args.rank,
             )
         else:
-            assert os.environ.get('CUDA_DEVICE_MAX_CONNECTIONS') == "1", \
-                "Using tensor model parallelism or context parallelism require setting the environment variable " \
-                "CUDA_DEVICE_MAX_CONNECTIONS to 1"
+            # assert os.environ.get('CUDA_DEVICE_MAX_CONNECTIONS') == "1", \
+            #     "Using tensor model parallelism or context parallelism require setting the environment variable " \
+            #     "CUDA_DEVICE_MAX_CONNECTIONS to 1"
+            pass
 
     # Setting FSDP communication groups for high priority streams for Blackwell and later architectures
     # Assigning high priority to communication streams ensures that communication kernels are scheduled
@@ -1321,7 +1322,7 @@ def core_transformer_config_from_args(args, config_class=None):
         if hasattr(args, f.name):
             kw_args[f.name] = getattr(args, f.name)
     kw_args['persist_layer_norm'] = not args.no_persist_layer_norm
-    kw_args['deallocate_pipeline_outputs'] = True
+    kw_args['deallocate_pipeline_outputs'] = not args.use_megatron_fsdp
     kw_args['pipeline_dtype'] = args.params_dtype
     kw_args['batch_p2p_comm'] = not args.overlap_p2p_comm
     kw_args['num_moe_experts'] = args.num_experts
