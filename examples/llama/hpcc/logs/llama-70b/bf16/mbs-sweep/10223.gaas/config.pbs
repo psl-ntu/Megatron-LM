@@ -137,7 +137,6 @@ mpirun --mca plm_rsh_agent pbs_tmrsh \
        -x PROFILE \
        -x MEGATRON_PROFILE -x MERGE_MEGATRON_PROFILE -x MEGATRON_PROFILE_STACK -x TRACE_DIR \
        bash -c '
-           echo "CPU affinity: $(taskset -cp $$)"
            echo "[$(date +%T)] $(hostname): starting"
            module purge
            module load cuda/13.0 gnu/gcc-12.3

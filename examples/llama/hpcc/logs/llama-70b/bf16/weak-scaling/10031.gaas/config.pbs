@@ -1,6 +1,6 @@
 #!/bin/bash
 #PBS -N megatron-train
-#PBS -l select=1:ngpus=8:ncpus=96:mem=1536gb
+#PBS -l select=16:ngpus=8
 #PBS -l place=scatter
 #PBS -l walltime=00:30:00
 #PBS -j oe
@@ -26,17 +26,15 @@ export NUM_NODES=$(wc -l < "${PBS_NODEFILE}")
 export TP_SIZE=${TP_SIZE:-1}
 export PP_SIZE=${PP_SIZE:-1}
 export CP_SIZE=${CP_SIZE:-1}
-export VIRTUAL_PIPELINE_STAGES=${VIRTUAL_PIPELINE_STAGES:-0}
 DP_SIZE=$(( NUM_NODES * GPUS_PER_NODE / (TP_SIZE * PP_SIZE) ))
-export ENABLE_FSDP=0
 
 # Training
 export RECOMPUTE_LAYERS=${RECOMPUTE_LAYERS:-0}    # 0=disabled | N=recompute N layers per PP stage (full/uniform)
 export PROFILE=${PROFILE:-0}             # 0=disabled | 1=enabled (NVTX markers, use with nsys profile)
 export MICRO_BATCH_SIZE=${MICRO_BATCH_SIZE:-2}
-export GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-64}
+export GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-32768}
 GRAD_ACCUMU_STEP=$(( GLOBAL_BATCH_SIZE / (MICRO_BATCH_SIZE * DP_SIZE) ))
-export TRAIN_SAMPLES=${TRAIN_SAMPLES:-$(( GLOBAL_BATCH_SIZE * 3 ))}
+export TRAIN_SAMPLES=${TRAIN_SAMPLES:-$(( GLOBAL_BATCH_SIZE * 5 ))}
 export NUM_LAYERS=${NUM_LAYERS:-32}
 export SEQ_LENGTH=${SEQ_LENGTH:-4096}
 export HIDDEN_SIZE=${HIDDEN_SIZE:-4096}
@@ -100,8 +98,6 @@ ENABLE_FP8_ATTN=$ENABLE_FP8_ATTN
 TP_SIZE=$TP_SIZE
 PP_SIZE=$PP_SIZE
 CP_SIZE=$CP_SIZE
-ENABLE_FSDP=$ENABLE_FSDP
-VIRTUAL_PIPELINE_STAGES=$VIRTUAL_PIPELINE_STAGES
 RECOMPUTE_LAYERS=$RECOMPUTE_LAYERS
 PROFILE=$PROFILE
 MICRO_BATCH_SIZE=$MICRO_BATCH_SIZE
@@ -127,9 +123,9 @@ mpirun --mca plm_rsh_agent pbs_tmrsh \
        -x SCRATCH \
        -x CUDA_VISIBLE_DEVICES \
        -x GPUS_PER_NODE -x NUM_NODES \
-       -x MASTER_ADDR -x MASTER_PORT -x PBS_JOBID \
+       -x MASTER_ADDR -x MASTER_PORT \
        -x DTYPE -x ATTENTION_BACKEND -x ENABLE_FP8_ATTN \
-       -x TP_SIZE -x PP_SIZE -x CP_SIZE -x ENABLE_FSDP -x VIRTUAL_PIPELINE_STAGES \
+       -x TP_SIZE -x PP_SIZE -x CP_SIZE \
        -x MICRO_BATCH_SIZE -x GLOBAL_BATCH_SIZE -x EMPTY_UNUSED_MEMORY_LEVEL \
        -x TRAIN_SAMPLES -x NUM_LAYERS -x SEQ_LENGTH \
        -x HIDDEN_SIZE -x FFN_HIDDEN_SIZE -x NUM_ATTENTION_HEADS -x NUM_QUERY_GROUPS -x INIT_METHOD_STD \
@@ -137,12 +133,10 @@ mpirun --mca plm_rsh_agent pbs_tmrsh \
        -x PROFILE \
        -x MEGATRON_PROFILE -x MERGE_MEGATRON_PROFILE -x MEGATRON_PROFILE_STACK -x TRACE_DIR \
        bash -c '
-           echo "CPU affinity: $(taskset -cp $$)"
-           echo "[$(date +%T)] $(hostname): starting"
+           echo "CPU affinity on $(hostname): $(taskset -cp $$)"
            module purge
            module load cuda/13.0 gnu/gcc-12.3
            eval "$(/usr/local/anaconda2025/bin/conda shell.bash hook)"
            conda activate megatron-lm
-           echo "[$(date +%T)] $(hostname): launching torchrun"
            bash examples/llama/hpcc/train_llama_hpcc.sh
        ' 2>&1 | tee "$LOG_DIR/train.log"

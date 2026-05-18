@@ -26,8 +26,6 @@ MASTER_PORT=${MASTER_PORT:-6000}
 TP_SIZE=${TP_SIZE:-1}
 PP_SIZE=${PP_SIZE:-1}
 CP_SIZE=${CP_SIZE:-1}
-VIRTUAL_PIPELINE_STAGES=${VIRTUAL_PIPELINE_STAGES:-0}  # layers per virtual stage; 0 = disabled
-ENABLE_FSDP=${ENABLE_FSDP:-0}
 
 MICRO_BATCH_SIZE=${MICRO_BATCH_SIZE:-1}
 GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-128}
@@ -57,13 +55,11 @@ mkdir -p "$DATA_CACHE_PATH"
 # ============================================================
 # Argument assembly
 # ============================================================
-RDZV_ID=${PBS_JOBID%%.*}
 DISTRIBUTED_ARGS=(
     --nnodes=$NUM_NODES
     --nproc_per_node=$GPUS_PER_NODE
     --rdzv_backend=c10d
     --rdzv_endpoint=$MASTER_ADDR:$MASTER_PORT
-    --rdzv_id=${RDZV_ID:-default}
 )
 
 MODEL_ARGS=(
@@ -115,18 +111,6 @@ TRAINING_ARGS=(
     --overlap-param-gather
 )
 
-if [[ $ENABLE_FSDP -gt 0 ]]; then
-    TRAINING_ARGS+=(
-        --use-megatron-fsdp
-        --data-parallel-sharding-strategy optim_grads
-    )
-    # TRAINING_ARGS+=(
-    #     --ckpt-format fsdp_dtensor
-    # )
-else
-    : # --ckpt-format torch_dist  # commented out: not a valid arg in this Megatron build
-fi
-
 RECOMPUTE_ARGS=()
 if (( RECOMPUTE_LAYERS > 0 )); then
     RECOMPUTE_ARGS=(
@@ -166,7 +150,6 @@ MODEL_PARALLEL_ARGS=(
     --context-parallel-size $CP_SIZE
 )
 (( TP_SIZE > 1 )) && MODEL_PARALLEL_ARGS+=(--sequence-parallel)
-(( VIRTUAL_PIPELINE_STAGES > 0 )) && MODEL_PARALLEL_ARGS+=(--num-layers-per-virtual-pipeline-stage $VIRTUAL_PIPELINE_STAGES)
 
 if [[ "$TOKENIZER_ARG" == MOCK || "$DATA_ARG" == MOCK ]]; then
     DATA_ARGS=(
@@ -220,7 +203,6 @@ if [ ! -f pretrain_gpt.py ]; then
     exit 1
 fi
 
-echo "[train.sh] $(hostname): rdzv_endpoint=$MASTER_ADDR:$MASTER_PORT nnodes=$NUM_NODES nproc=$GPUS_PER_NODE"
 torchrun ${DISTRIBUTED_ARGS[@]} \
     pretrain_gpt.py \
     ${MODEL_ARGS[@]} \

@@ -1,6 +1,6 @@
 #!/bin/bash
 #PBS -N megatron-install
-#PBS -l select=1:ngpus=1:mem=64G
+#PBS -l select=1:ngpus=8
 #PBS -l walltime=01:00:00
 #PBS -j oe
 #PBS -o megatron-install.log

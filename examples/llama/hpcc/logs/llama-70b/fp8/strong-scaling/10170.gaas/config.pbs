@@ -1,6 +1,6 @@
 #!/bin/bash
 #PBS -N megatron-train
-#PBS -l select=1:ngpus=8:ncpus=96:mem=1536gb
+#PBS -l select=4:ngpus=8
 #PBS -l place=scatter
 #PBS -l walltime=00:30:00
 #PBS -j oe
@@ -34,7 +34,7 @@ export ENABLE_FSDP=0
 export RECOMPUTE_LAYERS=${RECOMPUTE_LAYERS:-0}    # 0=disabled | N=recompute N layers per PP stage (full/uniform)
 export PROFILE=${PROFILE:-0}             # 0=disabled | 1=enabled (NVTX markers, use with nsys profile)
 export MICRO_BATCH_SIZE=${MICRO_BATCH_SIZE:-2}
-export GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-64}
+export GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-32}
 GRAD_ACCUMU_STEP=$(( GLOBAL_BATCH_SIZE / (MICRO_BATCH_SIZE * DP_SIZE) ))
 export TRAIN_SAMPLES=${TRAIN_SAMPLES:-$(( GLOBAL_BATCH_SIZE * 3 ))}
 export NUM_LAYERS=${NUM_LAYERS:-32}
@@ -57,8 +57,8 @@ fi
 PROJ_DIR=$HOME/Megatron-LM
 cd $PROJ_DIR
 
-export MASTER_ADDR=$(head -1 "${PBS_NODEFILE}")
-export MASTER_PORT=29500
+export MASTER_ADDR=$(getent ahostsv4 $(head -1 "${PBS_NODEFILE}") | awk '{print $1; exit}')
+export MASTER_PORT=29700
 export MEGATRON_PROFILE=0 MERGE_MEGATRON_PROFILE=1 MEGATRON_PROFILE_STACK=0
 export TRACE_DIR=$SCRATCH/megatron_trace_${DTYPE}_dp${DP_SIZE}_pp${PP_SIZE}_tp${TP_SIZE}
 
@@ -137,7 +137,6 @@ mpirun --mca plm_rsh_agent pbs_tmrsh \
        -x PROFILE \
        -x MEGATRON_PROFILE -x MERGE_MEGATRON_PROFILE -x MEGATRON_PROFILE_STACK -x TRACE_DIR \
        bash -c '
-           echo "CPU affinity: $(taskset -cp $$)"
            echo "[$(date +%T)] $(hostname): starting"
            module purge
            module load cuda/13.0 gnu/gcc-12.3
