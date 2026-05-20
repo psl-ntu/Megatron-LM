@@ -28,6 +28,7 @@ PP_SIZE=${PP_SIZE:-1}
 CP_SIZE=${CP_SIZE:-1}
 VIRTUAL_PIPELINE_STAGES=${VIRTUAL_PIPELINE_STAGES:-0}  # layers per virtual stage; 0 = disabled
 ENABLE_FSDP=${ENABLE_FSDP:-0}
+FSDP_OVERLAP_RS_WITH_P2P=${FSDP_OVERLAP_RS_WITH_P2P:-0}
 
 MICRO_BATCH_SIZE=${MICRO_BATCH_SIZE:-1}
 GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-128}
@@ -119,6 +120,8 @@ if [[ $ENABLE_FSDP -gt 0 ]]; then
     TRAINING_ARGS+=(
         --use-megatron-fsdp
         --data-parallel-sharding-strategy optim_grads
+        # --ddp-num-buckets 1
+        # --ddp-bucket-size 1
     )
     TRAINING_ARGS+=(
         --ckpt-format fsdp_dtensor

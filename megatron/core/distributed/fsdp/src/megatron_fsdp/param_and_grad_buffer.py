@@ -2518,7 +2518,7 @@ class ParamAndGradBuffer:
                         dist_index=self.dist_index,
                         is_sharded_param=sharded_optimizer_state,
                         is_expert_param=pg.is_expert_param,
-                        run_check=True,
+                        run_check=False,
                         update_uneven_dtensor_chunk_meta=True,
                         force_sync_tp_duplicated_param=True,
                     )
@@ -2531,7 +2531,7 @@ class ParamAndGradBuffer:
                         dist_index=self.dist_index,
                         is_sharded_param=sharded_optimizer_state,
                         is_expert_param=pg.is_expert_param,
-                        run_check=True,
+                        run_check=False,
                         update_uneven_dtensor_chunk_meta=True,
                         force_sync_tp_duplicated_param=True,
                     )
@@ -2546,7 +2546,7 @@ class ParamAndGradBuffer:
                         dist_index=self.dist_index,
                         is_sharded_param=False,
                         is_expert_param=pg.is_expert_param,
-                        run_check=True,
+                        run_check=False,
                         update_uneven_dtensor_chunk_meta=False,
                         force_sync_tp_duplicated_param=True,
                     )

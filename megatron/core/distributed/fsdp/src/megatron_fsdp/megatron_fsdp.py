@@ -15,6 +15,7 @@
 import functools
 import importlib
 import logging
+import os
 from contextlib import contextmanager
 from enum import Enum, auto
 from typing import Any, Dict, List, Optional, Tuple
@@ -488,6 +489,12 @@ class MegatronFSDP(torch.nn.Module):
             None
         """
 
+        # When True, defer the RS pipeline drain from the end of each backward step to
+        # the start of the NEXT backward step.  This lets reduce-scatter run concurrently
+        # with pipeline-parallel P2P communication that occurs between microbatches.
+        # Set FSDP_OVERLAP_RS_WITH_P2P=1 to enable.
+        overlap_rs_with_p2p = os.environ.get("FSDP_OVERLAP_RS_WITH_P2P", "0") == "1"
+
         # Initialize module training state.
         for m in root_module.modules():
             setattr(m, "_training_state", TrainingState.IDLE)
@@ -788,7 +795,12 @@ class MegatronFSDP(torch.nn.Module):
                         and (is_last_microbatch or self.model_auto_sync)
                     ),
                 )
-                self.grad_reduce_pipeline.reset()
+                if not overlap_rs_with_p2p:
+                    # Default: drain RS synchronously before returning from backward.
+                    self.grad_reduce_pipeline.reset()
+                # else: RS stays in-flight so it can overlap with P2P.  The drain is
+                # deferred to _root_pre_backward at the start of the next microbatch's
+                # backward (after P2P), or to finish_grad_sync for the last microbatch.
 
             # Reset root_pre_backward_hook_issued flag.
             self._root_pre_backward_hook_issued = False
@@ -840,6 +852,13 @@ class MegatronFSDP(torch.nn.Module):
             if self._root_pre_backward_hook_issued:
                 return
             self._root_pre_backward_hook_issued = True
+
+            if overlap_rs_with_p2p:
+                # Drain in-flight RS from the previous microbatch.  This deliberately
+                # runs at the START of the next backward rather than at the END of the
+                # previous one, so RS can overlap with the P2P send/recv that happens
+                # between microbatches (FSDP_OVERLAP_RS_WITH_P2P=1).
+                self.grad_reduce_pipeline.reset()
 
             if self.ddp_config.data_parallel_sharding_strategy == "optim_grads_params":
                 for module in root_module.modules():
