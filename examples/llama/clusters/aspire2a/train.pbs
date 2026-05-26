@@ -1,0 +1,37 @@
+#!/bin/bash
+#PBS -q ai
+#PBS -N megatron-train
+#PBS -l select=8:ngpus=1
+#PBS -l place=scatter
+#PBS -l walltime=02:01:00
+#PBS -j oe
+#PBS -o megatron-train.log
+#PBS -P 52001005
+
+# Config overrides for test run
+export GPUS_PER_NODE=1
+export TP_SIZE=1
+export PP_SIZE=4
+export NUM_LAYERS=8
+export MICRO_BATCH_SIZE=4
+export GLOBAL_BATCH_SIZE=64
+export TRAIN_SAMPLES=$(( GLOBAL_BATCH_SIZE * 3 ))
+export SEQ_LENGTH=4096
+export ENABLE_FSDP=1
+
+export MASTER_ADDR=$(head -1 "${PBS_NODEFILE}")
+export MASTER_PORT=29500
+export NUM_NODES=$(wc -l < "${PBS_NODEFILE}")
+export CUDA_VISIBLE_DEVICES=$(seq 0 $((GPUS_PER_NODE - 1)) | paste -sd ',')
+
+PROJ_DIR=$HOME/Megatron-LM
+cd $PROJ_DIR
+
+module load miniforge3/25.3.1 gcc/12.2.0-nscc cuda/12.2.2 git/2.39.2
+conda activate megatron-lm
+
+echo "====== Nodes ======"
+cat $PBS_NODEFILE
+
+mpirun -np $NUM_NODES \
+    bash examples/llama/train.sh 2>&1 | tee train.log

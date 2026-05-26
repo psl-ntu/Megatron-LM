@@ -1,0 +1,30 @@
+#!/bin/bash
+#PBS -N megatron-install
+#PBS -l select=1:ngpus=8
+#PBS -l walltime=01:00:00
+#PBS -j oe
+#PBS -o megatron-install.log
+#PBS -P 52001005
+#PBS -q ai
+
+set -euo pipefail
+
+module purge
+module load miniforge3/25.3.1 gcc/12.2.0-nscc cuda/12.2.2 git/2.39.2
+conda create -n megatron-lm python=3.12 -y
+conda activate megatron-lm
+
+pip install torch==2.8.0 2>&1 | tee install.log
+
+# sys runtime and nvml.h
+export CUDA_HOME=${CUDA_HOME:-$(dirname $(dirname $(which nvcc)))}
+export CPATH=$CUDA_HOME/include:$CPATH
+export LIBRARY_PATH=$CUDA_HOME/lib64:$LIBRARY_PATH
+export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
+# conda NCCL
+CONDA_NVIDIA_PKG=$CONDA_PREFIX/lib/python3.12/site-packages/nvidia
+export CPATH=$CONDA_NVIDIA_PKG/nccl/include:$CONDA_NVIDIA_PKG/cudnn/include:$CPATH
+export LIBRARY_PATH=$CONDA_NVIDIA_PKG/nccl/lib:$CONDA_NVIDIA_PKG/cudnn/lib:$LIBRARY_PATH
+export LD_LIBRARY_PATH=$CONDA_NVIDIA_PKG/nccl/lib:$CONDA_NVIDIA_PKG/cudnn/lib:$LD_LIBRARY_PATH
+
+bash "$(dirname "$0")/../../install.sh"

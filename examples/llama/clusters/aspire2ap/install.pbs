@@ -1,0 +1,30 @@
+#!/bin/bash
+#PBS -N megatron-install
+#PBS -l select=1:ngpus=8
+#PBS -l walltime=02:00:00
+#PBS -j oe
+#PBS -o megatron-install.log
+#PBS -P 52001006
+
+set -euo pipefail
+
+module purge
+module load cuda/12.6.2 openmpi/5.0.5-gcc11-cuda12.6
+eval "$(/home/app/apps/miniforge3/24.3.0/bin/conda shell.bash hook)"
+
+conda create -n megatron-lm python=3.12 -y
+conda activate megatron-lm
+pip install torch==2.11.0 --index-url https://download.pytorch.org/whl/cu126 2>&1 | tee install.log
+
+# sys runtime and nvml.h
+export CUDA_HOME=${CUDA_HOME:-$(dirname $(dirname $(which nvcc)))}
+export CPATH=$CUDA_HOME/include
+export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
+# conda NCCL
+CONDA_NVIDIA_PKG=$CONDA_PREFIX/lib/python3.12/site-packages/nvidia
+export CPATH=$CONDA_NVIDIA_PKG/nccl/include:$CONDA_NVIDIA_PKG/cudnn/include:$CPATH
+export LD_LIBRARY_PATH=$CONDA_NVIDIA_PKG/nccl/lib:$CONDA_NVIDIA_PKG/cudnn/lib:$LD_LIBRARY_PATH
+
+export APEX_SED_EXTRA="sed -i '410,411d' apex/setup.py"
+
+bash "$(dirname "$0")/../../install.sh"

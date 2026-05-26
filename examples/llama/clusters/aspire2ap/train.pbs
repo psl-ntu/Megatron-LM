@@ -1,0 +1,42 @@
+#!/bin/bash
+#PBS -N megatron-train
+#PBS -l select=1:ngpus=8
+#PBS -l place=scatter
+#PBS -l walltime=00:30:00
+#PBS -j oe
+#PBS -o megatron-train.log
+#PBS -P 52001006
+
+# Config overrides
+export GPUS_PER_NODE=8
+export DTYPE=${DTYPE:-fp8}
+export TP_SIZE=${TP_SIZE:-8}
+export PP_SIZE=${PP_SIZE:-1}
+
+export MASTER_ADDR=$(head -1 "${PBS_NODEFILE}")
+export MASTER_PORT=29500
+export NUM_NODES=$(wc -l < "${PBS_NODEFILE}")
+export CUDA_VISIBLE_DEVICES=$(seq 0 $((GPUS_PER_NODE - 1)) | paste -sd ',')
+
+PROJ_DIR=$HOME/Megatron-LM
+cd $PROJ_DIR
+
+module load cuda/12.6.2 openmpi/5.0.5-gcc11-cuda12.6
+eval "$(/home/app/apps/miniforge3/24.3.0/bin/conda shell.bash hook)"
+conda activate megatron-lm
+
+echo "====== Nodes ======"
+cat $PBS_NODEFILE
+
+mpirun --mca plm_rsh_agent pbs_tmrsh \
+       -hostfile $PBS_NODEFILE -npernode 1 --bind-to none \
+       -x CUDA_VISIBLE_DEVICES -x GPUS_PER_NODE -x NUM_NODES \
+       -x MASTER_ADDR -x MASTER_PORT \
+       -x DTYPE -x TP_SIZE -x PP_SIZE -x SCRATCH \
+       bash -c '
+           echo "[$(date +%T)] $(hostname): starting"
+           module load cuda/12.6.2 openmpi/5.0.5-gcc11-cuda12.6
+           eval "$(/home/app/apps/miniforge3/24.3.0/bin/conda shell.bash hook)"
+           conda activate megatron-lm
+           bash examples/llama/train.sh
+       ' 2>&1 | tee train.log
